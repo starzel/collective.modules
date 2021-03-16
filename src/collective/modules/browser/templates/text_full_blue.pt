@@ -1,0 +1,50 @@
+<metal:module-core define-macro="module_core"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
+
+    <div class="dynajet-wrapper module"
+         tal:attributes="id python: 'module_' + context.getId()">
+        <div class="row">
+            <div class="col-12 mb-3" tal:condition="python: context.display_title and context.title">
+                <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
+                <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="dynajet-full dynajet bg-blue pb-50"
+                     tal:define="css_class python: 'dynajet-full dynajet bg-blue';
+                                 css_padding python: ' pb-50' if context.text2 and context.text3 else ' pb-30';
+                                 css_padding python: ' pb-20' if not (context.text2 and context.text3) else css_padding"
+                     tal:attributes="class python: css_class + css_padding">
+                    <div class="dynajet-table-wrap" tal:condition="python: context.text1">
+                        <div tal:replace="structure python:context.text1.output">
+                            Text 1
+                        </div>
+                    </div>
+                    <div class="dynajet-content-wrap" tal:condition="python: context.text2 or context.text3">
+                        <div tal:condition="python: context.text2"
+                             tal:replace="structure python:context.text2.output">
+                            Text 2
+                        </div>
+                        <div tal:condition="python: context.text3"
+                             tal:replace="structure python:context.text3.output">
+                            Text 3
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </div>
+
+</metal:module-core>

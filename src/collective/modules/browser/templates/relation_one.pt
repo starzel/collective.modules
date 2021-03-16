@@ -1,0 +1,103 @@
+<metal:module-core define-macro="module_core"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+                items python: context.items();
+                item python: items[0] if items else None;
+                image_helper nocall: context/@@image_helper;">
+
+    <div class="dynajet-wrapper module"
+         tal:attributes="id python: 'module_' + context.getId()">
+        <div class="row">
+            <a name="anchor" tal:attributes="name python:context.getId()" />
+            <div class="col-12 mb-3" tal:condition="python: context.title and context.title != 'None' or context.description">
+                <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
+                <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <div class="dynajet-box bg-blue">
+                    <div class="dynajet-content large">
+                        <div tal:condition="python: context.text"
+                             tal:replace="structure python:context.text.output" />
+                        <div class="dynajet-btn-group bottom">
+                            <a class="btn expand-collapse icon-dynajet-collapse"
+                               data-bs-toggle="collapse"
+                               href="#collapseText"
+                               role="button"
+                               aria-expanded="false"
+                               aria-controls="collapseText"
+                               tal:attributes="href python: '#collapse_' + context.id;
+                                               aria-controls python: 'collapse_' + context.id"
+                               tal:content="python: context.expand_button_text">
+                                Show all
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-8">
+                <div class="dynajet-box bg-image"
+                     tal:condition="python: item"
+                     tal:define="image_url python: image_helper.image_url(item, 'large')">
+                    <img class="wh-100"
+                         tal:condition="python: image_url"
+                         tal:attributes="src python: image_url;
+                                         alt python: item.title;">
+                    <div class="dynajet-content large">
+                        <h3 tal:content="python: item.title">Titel</h3>
+                        <div class="dynajet-btn-group inline">
+                            <a class="btn dynajet-btn-arrow icon-dynajet-arrow"
+                               tal:attributes="href python: item.absolute_url()"
+                               tal:content="python: context.link_text">
+                                Mehr erfahren
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row collapse search-results row-cols-2 row-cols-md-3 row-cols-lg-4"
+             id="collapseText"
+             tal:attributes="id python: 'collapse_' + context.id">
+
+            <div class="col" tal:repeat="item python: items">
+                <div class="result">
+                    <div class="result__image">
+                        <a class="result__image__shadow" href="#"
+                           tal:attributes="href python: item.absolute_url();
+                                           title python: item.title;">
+                            <img class="w-100"
+                                 tal:define="image_url python: image_helper.image_url(item)"
+                                 tal:condition="image_url"
+                                 tal:attributes="src python: image_url;
+                                                 alt python: item.title;" />
+                        </a>
+                    </div>
+                    <div class="result__body">
+                        <h5 tal:content="python: item.title">Title</h5>
+                    </div>
+                    <div class="dynajet-btn-group bottom">
+                        <a class="btn icon-dynajet-arrow bottom" href="#"
+                           tal:attributes="href python: item.absolute_url();
+                                           title python: item.title;">Mehr erfahren</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" tal:condition="python: checkPermission('Modify portal content', context)">
+            <div class="col">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </div>
+
+</metal:module-core>

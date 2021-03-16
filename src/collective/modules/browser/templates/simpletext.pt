@@ -1,0 +1,33 @@
+<metal:module-core define-macro="module_core"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
+
+    <div class="col-sm-12 col-md-6 col-xl-4">
+        <div class="dynajet-box bg-blue"
+             tal:attributes="class python: 'dynajet-box bg-{}'.format(context.template_variant)">
+            <div class="dynajet-image"
+                 tal:define="image_url python: view.image_url()"
+                 tal:condition="image_url">
+                <img class="d-block wh-100"
+                     tal:attributes="src python: image_url;
+                                     alt python: context.title;" />
+            </div>
+            <div class="dynajet-content">
+                <h3 tal:condition="python: context.title" tal:content="python: context.title">Title</h3>
+                <p tal:condition="python: context.description"
+                   tal:content="python: context.description">Description</p>
+                <div tal:condition="python: context.text"
+                     tal:content="structure python:context.text.output" />
+            </div>
+        </div>
+        <div class="row edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
+            <div class="col-12">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </div>
+
+</metal:module-core>

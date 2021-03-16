@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="collective.modules">
+
+  <subscriber handler=".modules.module_added"
+              for="collective.modules.content.modules.IModuleBase
+                   zope.lifecycleevent.IObjectAddedEvent"/>
+
+  <subscriber handler=".modules.module_modified"
+              for="collective.modules.content.modules.IModuleBase
+                   zope.lifecycleevent.IObjectModifiedEvent"/>
+
+  <subscriber handler=".modules.searchmodule_added"
+              for="collective.modules.content.modules.ISearchModule
+                   zope.lifecycleevent.IObjectAddedEvent"/>
+
+</configure>

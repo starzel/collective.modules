@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object name="foo" meta_type="Dexterity Container">
+ <criteria>
+  <criterion name="c0">
+   <property name="widget">resultsperpage</property>
+   <property name="title">Results per page</property>
+   <property name="default">200</property>
+   <property name="position">right</property>
+   <property name="section">default</property>
+   <property name="hidden">True</property>
+   <property name="start">25</property>
+   <property name="end">200</property>
+   <property name="step">25</property>
+  </criterion>
+  <criterion name="c2">
+   <property name="widget">sorting</property>
+   <property name="title">Sort on</property>
+   <property name="vocabulary"></property>
+   <property name="default">sortable_title</property>
+   <property name="position">right</property>
+   <property name="section">default</property>
+   <property name="hidden">True</property>
+  </criterion>
+  <criterion name="c4">
+   <property name="widget">select</property>
+   <property name="title">portal_type</property>
+   <property name="index">portal_type</property>
+   <property name="vocabulary">eea.faceted.vocabularies.PortalTypes</property>
+   <property name="hidealloption">False</property>
+   <property name="default">product</property>
+   <property name="position">right</property>
+   <property name="section">default</property>
+   <property name="hidden">True</property>
+   <property name="count">False</property>
+   <property name="sortcountable">False</property>
+   <property name="hidezerocount">False</property>
+   <property name="sortreversed">False</property>
+  </criterion>
+ </criteria>
+</object>

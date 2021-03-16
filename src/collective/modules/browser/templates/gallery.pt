@@ -1,0 +1,114 @@
+<metal:module-core define-macro="module_core"
+ i18n:domain="collective.modules"
+ tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+             image_helper nocall: context/@@image_helper;">
+
+    <div class="dynajet-wrapper module"
+         tal:define="images python:context.images()"
+         tal:attributes="id python: 'module_' + context.getId()">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-4 mb-5 text-container">
+                <h2 tal:content="python: context.title">Title</h2>
+                <p class="news-description" tal:content="python: context.description">Description</p>
+                <div tal:condition="python: context.text"
+                     tal:content="structure python:context.text.output">
+                    Text
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-12 col-lg-8 mb-5 slider-container">
+                <div class="carousel carousel-gallery slide" data-bs-ride="carousel" id="carouselExample"
+                     tal:attributes="id python: 'carousel_' + context.id">
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item"
+                             tal:repeat="image python: images"
+                             tal:attributes="class python: 'carousel-item active' if repeat['image'].start else 'carousel-item'">
+                            <div class="carousel-image"
+                                 tal:define="image_texts python: image_helper.image_texts(image);">
+                                <img class="d-block wh-100"
+                                     tal:attributes="src python:image.absolute_url() + '/@@images/image/gallery';
+                                                     alt python:image_texts['alt'];
+                                                     title python:image_texts['title']">
+                            </div>
+                        </div>
+                    </div>
+
+                    <a class="carousel-control-prev"
+                       tal:attributes="href python: '#carousel_' + context.id"
+                       role="button"
+                       data-bs-slide="prev">
+                        <span class="icon-dynajet-prev icon-large" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next"
+                       tal:attributes="href python: '#carousel_' + context.id"
+                       role="button"
+                       data-bs-slide="next">
+                        <span class="icon-dynajet-next icon-large" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 dynajet mb-3">
+                <div class="carousel-indicator-controls indicator-controls-prev"
+                    data-indicator="carouselExample_indicator"
+                    tal:attributes="data-indicator python: '#carousel_' + context.id + '_indicator'">
+                    <span class="icon-dynajet-prev"></span>
+                </div>
+                <div class="carousel-indicator-controls indicator-controls-next"
+                    data-indicator="carouselExample_indicator"
+                    tal:attributes="data-indicator python: '#carousel_' + context.id + '_indicator'">
+                    <span class="icon-dynajet-next"></span>
+                </div>
+                <ol class="carousel-indicator list-inline thumbnail-indicator slide w-100" id="carouselExample_indicator"
+                    tal:attributes="id python: 'carousel_' + context.id + '_indicator'">
+                    <li class="list-inline-item" tal:repeat="image python: images"
+                        tal:attributes="class python: 'list-inline-item active' if repeat['image'].start else 'list-inline-item'">
+                        <a href="#" data-bs-id="0" data-bs-target="#carouselExample"
+                           tal:attributes="data-bs-target python: '#carousel_' + context.id;
+                                           data-bs-id repeat/image/index;"
+                           tal:define="image_texts python: image_helper.image_texts(image);">
+                            <img src=""
+                                 tal:attributes="src python:image.absolute_url() + '/@@images/image/gallery';
+                                                 alt python:image_texts['alt'];
+                                                 title python:image_texts['title'];" />
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row"
+             tal:condition="python: context.show_links">
+            <div class="col-12">
+                <ul class="dynajet-icon-list inline">
+                    <li><a class="btn icon-dynajet-arrow" id="add_to_articles"
+                           href="#" i18n:translate=""
+                             tal:attributes="data-buyable_item_code python:context.__parent__.UID();
+                                        data-buyable_item_details context/@@article_item_details">Add to favorites</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12" tal:condition="python: checkPermission('Modify portal content', context)">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+                <a class="btn btn-primary btn-sm float-right"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/folder_contents'">
+                    Manage Images
+                </a>
+            </div>
+        </div>
+    </div>
+
+</metal:module-core>

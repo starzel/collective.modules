@@ -1,0 +1,41 @@
+<metal:module-core define-macro="module_core"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
+
+    <div class="dynajet-wrapper module"
+         tal:attributes="id python: 'module_' + context.getId()">
+        <div class="row">
+            <div class="col-12 mb-3" tal:condition="python: context.display_title and context.title">
+                <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
+                <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container"
+                tal:condition="python: context.text1"
+                tal:content="structure python:context.text1.output">
+            </div>
+
+            <div class="col-sm-12 col-lg-8 mb-4 text-container"
+                tal:condition="python: context.text2"
+                tal:content="structure python:context.text2.output">
+            </div>
+
+            <div class="col-12 mb-4 text-container"
+                tal:condition="python: context.text3"
+                tal:content="structure python:context.text3.output">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </div>
+
+</metal:module-core>

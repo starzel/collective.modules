@@ -1,0 +1,159 @@
+<metal:content-core define-macro="content-core"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+                filter_results python: view.results();
+                uuid python: context.UID()">
+
+    <div class="dynajet-wrapper module mb-full filter"
+         tal:define="form_name python: 'radio_' + uuid"
+         tal:attributes="id python: 'module_' + context.getId()">
+        <div tal:attributes="id python: form_name">
+            <div class="row">
+            <div class="col-12 mb-3" tal:condition="python: context.display_title and context.title">
+                <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
+                <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="dynajet-full bg-gray"
+                     tal:attributes="class python:'dynajet-full bg-' + context.background_color">
+
+                    <div class="row" tal:condition="python: context.text">
+                        <div class="col-10 col-md-8 col-xl-6">
+                            <div class="module__description" tal:content="structure python:context.text.output">
+                                <p>Text</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12 col-lg-6 col-xl-4">
+                            <div class="search-filter-image">
+                                <img class="d-block wh-100"
+                                     tal:define="module_image_url python: view.module_image_url()"
+                                     tal:condition="python: module_image_url"
+                                     tal:attributes="src python: module_image_url" />
+                                <div class="dynajet-btn-group bottom">
+                                    <a class="btn expand-collapse icon-dynajet-expand"
+                                       data-bs-toggle="collapse"
+                                       href="#collapseExample"
+                                       role="button"
+                                       aria-expanded="false"
+                                       aria-controls="collapseExample"
+                                       tal:content="python: context.expand_button_text"
+                                       tal:attributes="aria-controls python: 'collapse_' + uuid;
+                                                       href python: '#collapse_' + uuid">
+                                        Show all
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-xl-8">
+                            <div class="row">
+                                <div class="col-12 col-xl-6">
+                                    <div class="search-filter-topic">
+                                        <div class="input-group">
+                                            <div class="select">
+                                                <select class="custom-select search-filter-options">
+                                                    <option value="" selected>Thema wählen</option>
+                                                    <tal:options repeat="item python: filter_results">
+                                                        <option value=""
+                                                                tal:attributes="value python: item['uid'];
+                                                                                title python: item['title']"
+                                                                tal:content="python: item['title']">
+                                                            Title
+                                                        </option>
+                                                    </tal:options>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xl-6">
+                                    <div class="search-filter-radios">
+                                        <div class="dynajet-checkbox">
+                                            <input class="dynajet-control-input"
+                                                   type="radio"
+                                                   name="radio_all"
+                                                   id="radio_all"
+                                                   value="radio_all"
+                                                   tal:attributes="name python: form_name;
+                                                                   id python: 'radio_all_' + uuid" />
+                                            <label class="dynajet-control-label"
+                                                   for="radio_all"
+                                                   tal:attributes="for python: 'radio_all_' + uuid">Alle</label>
+                                        </div>
+                                        <tal:filter repeat="option python: view.filter_options()">
+                                            <div class="dynajet-checkbox">
+                                                <input class="dynajet-control-input"
+                                                       type="radio"
+                                                       name="exampleRadios"
+                                                       id="exampleRadios"
+                                                       value="option"
+                                                       tal:attributes="value python: option['value'];
+                                                                       name python: form_name;
+                                                                       id python: option['value'] + uuid" />
+                                                <label class="dynajet-control-label"
+                                                       tal:attributes="for python: option['value'] + uuid"
+                                                       tal:content="python: option['label']">
+                                                    Title
+                                                </label>
+                                            </div>
+                                        </tal:filter>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row search-results row-cols-2 row-cols-md-3 row-cols-lg-4 collapse"
+             id="collapseExample"
+             tal:attributes="id python: 'collapse_' + uuid">
+            <div class="col hideable"
+                 tal:repeat="item python: filter_results"
+                 tal:attributes="class python: item['css_classes'] and item['css_classes'] + ' hideable' or 'hideable'">
+                <div class="result">
+                    <div class="result__image">
+                        <a class="result__image__shadow"
+                           href="#"
+                           tal:attributes="href python: item['url'];
+                                           title python: item['title']">
+                           <img class="w-100"
+                                tal:attributes="src python: item['image_url'];
+                                                title python: item['title']" />
+                        </a>
+                    </div>
+                    <div class="result__body">
+                        <h5 tal:content="python: item['title']">Title</h5>
+                    </div>
+                    <div class="dynajet-btn-group bottom">
+                        <a class="btn icon-dynajet-arrow" href="#"
+                           i18n:translate=""
+                           tal:attributes="href python: item['url'];
+                                           title python: item['title']">Zum Artikel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
+            <div class="col-12">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</metal:content-core>

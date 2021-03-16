@@ -1,0 +1,61 @@
+<metal:content-core define-macro="content-core"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
+
+    <div class="row">
+        <a name="" tal:attributes="name python:context.navigation_title" />
+        <div class="col-12 mb-3" tal:condition="python: context.display_title and context.title">
+            <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
+            <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-4"
+            tal:condition="python: context.text"
+            tal:content="structure python:context.text.output">
+        </div>
+
+        <div class="col-sm-12 col-md-8 col-lg-8 mb-4">
+
+            <div id="search_block" tal:attributes="data-base-search-url python: context.absolute_url() + '/'">
+                <tal:widget repeat="widget view/search_widgets">
+                    <div tal:replace="structure widget">Widget</div>
+                </tal:widget>
+            </div>
+
+        </div>
+
+        <div class="col-sm-12 col-lg-12">
+
+            <!-- Results -->
+            <metal:results define-macro="results" tal:define="
+                    mode mode | string:edit;
+                    view_mode python:mode == 'view';
+                    edit_mode python:mode == 'edit';
+                    search_mode python:mode == 'search';
+                    faceted_html faceted_html | string:;
+                    ">
+                <div id="faceted-results" class="faceted-results"
+                         metal:define-slot="content">
+                    <noscript tal:condition="view_mode">
+                        <tal:results replace="structure python:faceted_html"/>
+                    </noscript>
+                </div>
+            </metal:results>
+
+        </div>
+
+        <div class="col-12" tal:condition="python: checkPermission('Modify portal content', context)">
+            <a class="btn btn-primary btn-sm float-right"
+               tal:condition="python:checkPermission('Manage portal', context)"
+               tal:attributes="href python: context.absolute_url() + '/configure_faceted.html'"
+               target="_blank">
+                Suche konfigurieren
+            </a>
+            <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+               tal:condition="python: checkPermission('Modify portal content', context)"
+               tal:attributes="href python: context.absolute_url() + '/edit'">
+                Edit Module
+            </a>
+        </div>
+    </div>
+
+</metal:content-core>

@@ -1,0 +1,53 @@
+<metal:module-core define-macro="module_core"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
+
+    <div class="dynajet-wrapper module"
+         tal:attributes="id python: 'module_' + context.getId()">
+        <div class="row">
+            <div class="col-12 mb-3" tal:condition="python: context.display_title and context.title">
+                <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
+                <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="dynajet-full bg-blue"
+                     tal:define="link_url python:view.link_url(context.link);"
+                     tal:attributes="class python: 'dynajet-full bg-{}'.format(context.template_variant)">
+                    <div class="dynajet-background">
+                        <img tal:condition="python: context.image"
+                             tal:attributes="src python: context.absolute_url() + '/@@images/image/gallery';
+                                             alt python: context.title"
+                             class="wh-100">
+                        <div class="dynajet-large top"
+                             tal:condition="python: context.text">
+                            <div tal:replace="structure python:context.text.output" />
+                        </div>
+                        <ul class="dynajet-icon-list bottom"
+                            tal:condition="python: link_url">
+                            <li>
+                                <a class="btn icon-dynajet-arrow"
+                                   tal:attributes="href python: link_url"
+                                   tal:content="python: context.link_text">
+                                  Mehr erfahren
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </div>
+
+</metal:module-core>

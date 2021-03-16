@@ -1,0 +1,141 @@
+<metal:module-core
+    define-macro="module_core"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+                image_helper nocall: context/@@image_helper;
+                plone_view nocall: context/@@plone;
+                url python: context.absolute_url();">
+
+    <div class="dynajet-wrapper module"
+         tal:attributes="id python: 'module_' + context.getId()">
+        <div class="row">
+
+            <div class="col-12 mb-3" tal:condition="python: context.display_title and context.title">
+                <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
+                <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
+            </div>
+
+            <div class="col-lg"
+                 tal:define="index python: '1';
+                             image python:getattr(context, 'image' + index, None);
+                             title python:getattr(context, 'title' + index, None);
+                             text  python:getattr(context, 'text' + index, None);
+                             link_url python:view.link_url(getattr(context, 'link' + index, None));
+                             link_text python:getattr(context, 'link_text' + index, None);
+                             ">
+              <div class="dynajet-box bg-gray">
+                <div class="dynajet-image"
+                     tal:condition="python: image">
+                  <img class="d-block wh-100"
+                       tal:attributes="src python: url + '/@@images/image' + index + '/preview';
+                                       alt python: title;">
+                </div>
+                <div class="dynajet-content">
+                  <a tal:attributes="href python: link_url"
+                     tal:omit-tag="python: not link_url">
+                    <h3 tal:condition="python: title"
+                        tal:content="python: title">Titel</h3>
+                    <p tal:condition="python: text"
+                       tal:content="structure python: text">Text</p>
+                  </a>
+                  <ul class="dynajet-icon-list bottom"
+                      tal:condition="python: link_url">
+                    <li>
+                      <a class="btn icon-dynajet-arrow"
+                         href="#"
+                         tal:attributes="href python: link_url"
+                         tal:content="python: link_text">
+                        Mehr erfahren
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg"
+                 tal:define="index python: '2';
+                             image python:getattr(context, 'image' + index, None);
+                             title python:getattr(context, 'title' + index, None);
+                             text  python:getattr(context, 'text' + index, None);
+                             link_url python:view.link_url(getattr(context, 'link' + index, None));
+                             link_text python:getattr(context, 'link_text' + index, None);
+                             ">
+              <div class="dynajet-box bg-gray">
+                <div class="dynajet-image"
+                     tal:condition="python: image">
+                  <img class="d-block wh-100"
+                       tal:attributes="src python: url + '/@@images/image' + index + '/preview';
+                                       alt python: title;">
+                </div>
+                <div class="dynajet-content">
+                  <a tal:attributes="href python: link_url"
+                     tal:omit-tag="python: not link_url">
+                    <h3 tal:condition="python: title"
+                        tal:content="python: title">Titel</h3>
+                    <p tal:condition="python: text"
+                       tal:content="structure python: text">Text</p>
+                  </a>
+                  <ul class="dynajet-icon-list bottom"
+                      tal:condition="python: link_url">
+                    <li>
+                      <a class="btn icon-dynajet-arrow"
+                         href="#"
+                         tal:attributes="href python: link_url"
+                         tal:content="python: link_text">
+                        Mehr erfahren
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg"
+                 tal:define="index python: '3';
+                             image python:getattr(context, 'image' + index, None);
+                             title python:getattr(context, 'title' + index, None);
+                             text  python:getattr(context, 'text' + index, None);
+                             link_url python:view.link_url(getattr(context, 'link' + index, None));
+                             link_text python:getattr(context, 'link_text' + index, None);
+                             ">
+              <div class="dynajet-box bg-gray">
+                <div class="dynajet-image"
+                     tal:condition="python: image">
+                  <img class="d-block wh-100"
+                       tal:attributes="src python: url + '/@@images/image' + index + '/preview';
+                                       alt python: title;">
+                </div>
+                <div class="dynajet-content">
+                  <a tal:attributes="href python: link_url"
+                     tal:omit-tag="python: not link_url">
+                    <h3 tal:condition="python: title"
+                        tal:content="python: title">Titel</h3>
+                    <p tal:condition="python: text"
+                       tal:content="structure python: text">Text</p>
+                  </a>
+                  <ul class="dynajet-icon-list bottom"
+                      tal:condition="python: link_url">
+                    <li>
+                      <a class="btn icon-dynajet-arrow"
+                         href="#"
+                         tal:attributes="href python: link_url"
+                         tal:content="python: link_text">
+                        Mehr erfahren
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12" tal:condition="python: checkPermission('Modify portal content', context)">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </div>
+
+</metal:module-core>

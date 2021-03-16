@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<object meta_type="Plone Types Tool" name="portal_types">
+
+ <!-- modules -->
+ <object meta_type="Dexterity FTI" name="textmodule" />
+ <object meta_type="Dexterity FTI" name="relationmodule" />
+ <object meta_type="Dexterity FTI" name="videomodule" />
+ <object meta_type="Dexterity FTI" name="gallerymodule" />
+ <object meta_type="Dexterity FTI" name="simpletextmodule" />
+ <object meta_type="Dexterity FTI" name="searchmodule" />
+ <object meta_type="Dexterity FTI" name="filtermodule" />
+ <object meta_type="Dexterity FTI" name="textwithimagesmodule" />
+ <object meta_type="Dexterity FTI" name="bannermodule" />
+
+</object>

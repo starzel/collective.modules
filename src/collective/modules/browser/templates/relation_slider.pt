@@ -1,0 +1,72 @@
+<metal:module-core define-macro="module_core"
+         tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+        items python: context.items();
+        item python: items[0] if items else None;
+        image_helper nocall: context/@@image_helper;
+        plone_view nocall: context/@@plone;">
+
+    <div class="col-sm-12 col-md-6 col-xl-4">
+        <div class="dynajet-box bg-gray">
+            <div class="carousel carousel-box-full slide"
+                 id="carouselExample"
+                 data-bs-ride="carousel"
+                 data-bs-interval="10000"
+                 tal:attributes="id python: 'carousel_' + context.id">
+                <div class="carousel-inner">
+                <tal:loop tal:repeat="item items">
+                    <div class="carousel-item"
+                         tal:define="active python:repeat['item'].start and ' active' or ''"
+                         tal:attributes="class string:carousel-item${active}">
+                        <div class="carousel-image">
+                            <img class="d-block wh-100"
+                                 tal:define="image_url python: image_helper.image_url(item)"
+                                 tal:condition="image_url"
+                                 tal:attributes="src python: image_url;
+                                                 alt python: item.title;" />
+                        </div>
+                        <div class="dynajet-content">
+                            <h3 tal:content="python: plone_view.cropText(item.title, 48)">Title</h3>
+                            <p tal:condition="python: item.description"
+                               tal:content="python: plone_view.cropText(item.description, 102)">Description</p>
+                            <ul class="dynajet-icon-list bg-blue bottom">
+                                <li>
+                                    <a class="btn icon-dynajet-arrow"
+                                       href="#"
+                                       tal:content="python: context.link_text"
+                                       tal:attributes="href python: item.absolute_url();
+                                                       title python: item.title;">
+                                          Mehr erfahren
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </tal:loop>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExample" role="button"
+                   data-bs-slide="prev"
+                   tal:attributes="href python: '#carousel_' + context.id">
+                    <span class="icon-dynajet-prev icon-big"
+                          aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExample" role="button"
+                   data-bs-slide="next"
+                   tal:attributes="href python: '#carousel_' + context.id">
+                    <span class="icon-dynajet-next icon-big"
+                          aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="row edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
+            <div class="col-12">
+                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </div>
+</metal:module-core>

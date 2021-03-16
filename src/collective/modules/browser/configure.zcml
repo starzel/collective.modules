@@ -1,0 +1,189 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.modules">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="collective.modules.interfaces.ICollectiveModulesLayer"
+      />
+
+  <!-- Publish static files -->
+  <plone:static
+      name="collective.modules"
+      type="plone"
+      directory="static"
+      />
+
+  <browser:page
+      name="image_helper"
+      for="*"
+      class=".helpers.ImageHelper"
+      permission="zope2.View"
+      />
+
+  <!-- Modules -->
+
+  <browser:page
+      name="modules_view"
+      for="*"
+      class=".modules.ModulesView"
+      template="templates/modules_view.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="redirect_to_parent"
+      for="collective.modules.content.modules.IModuleBase"
+      class=".modules.RedirectToParent"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.IVideoModule"
+      class=".modules.VideoModuleView"
+      template="templates/video.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.IVideoModule"
+      class=".modules.VideoModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.ITextModule"
+      class=".modules.TextModuleView"
+      template="templates/text.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.ITextModule"
+      class=".modules.TextModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.ITextWithImagesModule"
+      class=".modules.TextWithImagesModuleView"
+      template="templates/text_with_images.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.ITextWithImagesModule"
+      class=".modules.TextWithImagesModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.ISimpleTextModule"
+      class=".modules.SimpleTextModuleView"
+      template="templates/simpletext.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.ISimpleTextModule"
+      class=".modules.SimpleTextModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.IRelationModule"
+      class=".modules.RelationModuleView"
+      template="templates/relation.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.IRelationModule"
+      class=".modules.RelationModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.IGalleryModule"
+      class=".modules.GalleryModuleView"
+      template="templates/gallery.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.IGalleryModule"
+      class=".modules.GalleryModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.ISearchModule"
+      class=".modules.SearchModuleView"
+      template="templates/search.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.ISearchModule"
+      class=".modules.SearchModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.IFilterModule"
+      class=".modules.FilterModuleView"
+      template="templates/filter.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.IFilterModule"
+      class=".modules.FilterModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.IBannerModule"
+      class=".modules.BannerModuleView"
+      template="templates/banner.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.IBannerModule"
+      class=".modules.BannerModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+</configure>

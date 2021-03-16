@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<registry
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="collective.modules">
+
+  <record name="plone.types_not_searched">
+    <value purge="False">
+      <element>filtermodule</element>
+      <element>gallerymodule</element>
+      <element>relationmodule</element>
+      <element>searchmodule</element>
+      <element>simpletextmodule</element>
+      <element>textmodule</element>
+      <element>videomodule</element>
+      <element>bannermodule</element>
+      <element>textwithimagesmodule</element>
+    </value>
+  </record>
+
+</registry>
