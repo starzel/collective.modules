@@ -4,7 +4,7 @@
  <property name="view_methods" purge="False">
   <element value="modules_view"/>
  </property>
- <property name="behaviors" purge="false">
+ <property name="behaviors" purge="False">
   <element value="collective.modules" />
  </property>
 </object>

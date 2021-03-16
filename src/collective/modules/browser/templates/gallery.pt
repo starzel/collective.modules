@@ -24,12 +24,9 @@
                         <div class="carousel-item"
                              tal:repeat="image python: images"
                              tal:attributes="class python: 'carousel-item active' if repeat['image'].start else 'carousel-item'">
-                            <div class="carousel-image"
-                                 tal:define="image_texts python: image_helper.image_texts(image);">
+                            <div class="carousel-image">
                                 <img class="d-block wh-100"
-                                     tal:attributes="src python:image.absolute_url() + '/@@images/image/gallery';
-                                                     alt python:image_texts['alt'];
-                                                     title python:image_texts['title']">
+                                     tal:attributes="src python:image.absolute_url() + '/@@images/image/preview';">
                             </div>
                         </div>
                     </div>
@@ -71,27 +68,12 @@
                         tal:attributes="class python: 'list-inline-item active' if repeat['image'].start else 'list-inline-item'">
                         <a href="#" data-bs-id="0" data-bs-target="#carouselExample"
                            tal:attributes="data-bs-target python: '#carousel_' + context.id;
-                                           data-bs-id repeat/image/index;"
-                           tal:define="image_texts python: image_helper.image_texts(image);">
+                                           data-bs-id repeat/image/index;">
                             <img src=""
-                                 tal:attributes="src python:image.absolute_url() + '/@@images/image/gallery';
-                                                 alt python:image_texts['alt'];
-                                                 title python:image_texts['title'];" />
+                                 tal:attributes="src python:image.absolute_url() + '/@@images/image/preview';" />
                         </a>
                     </li>
                 </ol>
-            </div>
-        </div>
-
-        <div class="row"
-             tal:condition="python: context.show_links">
-            <div class="col-12">
-                <ul class="dynajet-icon-list inline">
-                    <li><a class="btn icon-dynajet-arrow" id="add_to_articles"
-                           href="#" i18n:translate=""
-                             tal:attributes="data-buyable_item_code python:context.__parent__.UID();
-                                        data-buyable_item_details context/@@article_item_details">Add to favorites</a></li>
-                </ul>
             </div>
         </div>
 

@@ -78,8 +78,8 @@ class ModuleBaseView(DefaultView):
 
 class VideoModuleView(ModuleBaseView):
 
-    video = ViewPageTemplateFile('module_templates/video.pt')
-    video_one = ViewPageTemplateFile('module_templates/video_one.pt')
+    video = ViewPageTemplateFile('templates/video.pt')
+    video_one = ViewPageTemplateFile('templates/video_one.pt')
 
     def video_infos(self):
         results = []
@@ -106,15 +106,15 @@ class VideoModuleView(ModuleBaseView):
 
 class TextModuleView(ModuleBaseView):
 
-    text = ViewPageTemplateFile('module_templates/text.pt')
-    text_one_two = ViewPageTemplateFile('module_templates/text_one_two.pt')
-    text_expandable = ViewPageTemplateFile('module_templates/text_expandable.pt')
-    text_full_blue = ViewPageTemplateFile('module_templates/text_full_blue.pt')
+    text = ViewPageTemplateFile('templates/text.pt')
+    text_one_two = ViewPageTemplateFile('templates/text_one_two.pt')
+    text_expandable = ViewPageTemplateFile('templates/text_expandable.pt')
+    text_full_blue = ViewPageTemplateFile('templates/text_full_blue.pt')
 
 
 class TextWithImagesModuleView(ModuleBaseView):
 
-    text_with_images = ViewPageTemplateFile('module_templates/text_with_images.pt')
+    text_with_images = ViewPageTemplateFile('templates/text_with_images.pt')
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
@@ -122,8 +122,8 @@ class TextWithImagesModuleView(ModuleBaseView):
 
 class BannerModuleView(ModuleBaseView):
 
-    blue = ViewPageTemplateFile('module_templates/banner.pt')
-    gray = ViewPageTemplateFile('module_templates/banner.pt')
+    blue = ViewPageTemplateFile('templates/banner.pt')
+    gray = ViewPageTemplateFile('templates/banner.pt')
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
@@ -131,9 +131,9 @@ class BannerModuleView(ModuleBaseView):
 
 class SimpleTextModuleView(ModuleBaseView):
 
-    blue = ViewPageTemplateFile('module_templates/simpletext.pt')
-    white = ViewPageTemplateFile('module_templates/simpletext.pt')
-    gray = ViewPageTemplateFile('module_templates/simpletext.pt')
+    blue = ViewPageTemplateFile('templates/simpletext.pt')
+    white = ViewPageTemplateFile('templates/simpletext.pt')
+    gray = ViewPageTemplateFile('templates/simpletext.pt')
 
     def image_url(self):
         if getattr(self.context.aq_base, 'image', None):
@@ -142,23 +142,23 @@ class SimpleTextModuleView(ModuleBaseView):
 
 class RelationModuleView(ModuleBaseView):
 
-    blue = ViewPageTemplateFile('module_templates/relation.pt')
-    white = ViewPageTemplateFile('module_templates/relation.pt')
-    gray = ViewPageTemplateFile('module_templates/relation.pt')
-    one = ViewPageTemplateFile('module_templates/relation_one.pt')
-    all_items = ViewPageTemplateFile('module_templates/relation_all_items.pt')
-    all_items_gray = ViewPageTemplateFile('module_templates/relation_all_items_gray.pt')
-    slider = ViewPageTemplateFile('module_templates/relation_slider.pt')
+    blue = ViewPageTemplateFile('templates/relation.pt')
+    white = ViewPageTemplateFile('templates/relation.pt')
+    gray = ViewPageTemplateFile('templates/relation.pt')
+    one = ViewPageTemplateFile('templates/relation_one.pt')
+    all_items = ViewPageTemplateFile('templates/relation_all_items.pt')
+    all_items_gray = ViewPageTemplateFile('templates/relation_all_items_gray.pt')
+    slider = ViewPageTemplateFile('templates/relation_slider.pt')
 
 
 class GalleryModuleView(ModuleBaseView):
 
-    gallery = ViewPageTemplateFile('module_templates/gallery.pt')
+    gallery = ViewPageTemplateFile('templates/gallery.pt')
 
 
 class SearchModuleView(ModuleBaseView):
 
-    search = ViewPageTemplateFile('module_templates/search.pt')
+    search = ViewPageTemplateFile('templates/search.pt')
 
     def search_widgets(self):
         view = api.content.get_view(
@@ -172,7 +172,7 @@ class SearchModuleView(ModuleBaseView):
 
 class FilterModuleView(ModuleBaseView):
 
-    filter = ViewPageTemplateFile('module_templates/filter.pt')
+    filter = ViewPageTemplateFile('templates/filter.pt')
 
     def results(self):
         query = {'portal_type': self.context.portaltype}

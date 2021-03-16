@@ -225,12 +225,6 @@ class IGalleryModule(IModuleBase):
         required=False,
     )
 
-    show_links = schema.Bool(
-        title='Show bookmark-link below gallery',
-        required=False,
-        default=True,
-    )
-
     show_contained_images = schema.Bool(
         title='Show images that are inside this folder',
         required=False,

@@ -1,4 +1,5 @@
 from collective.modules.behaviors.modules import IModules
+from plone import api
 from plone.indexer.decorator import indexer
 from plone.app.textfield.value import RichTextValue
 
