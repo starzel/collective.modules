@@ -1,5 +1,6 @@
 <metal:module-core
     define-macro="module_core"
+    i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 items python: context.items();
                 image_helper nocall: context/@@image_helper;
@@ -21,7 +22,7 @@
                         tal:content="structure python:context.text.output" />
 
                         <div class="dynajet-btn-group bottom" tal:condition="python: len(items) > 2">
-                            <a class="btn expand-collapse icon-dynajet-expand"
+                            <a class="btn expand-collapse icon-dynajet-expand collapse-relation"
                                data-bs-toggle="collapse"
                                href="#collapseText"
                                role="button"
@@ -37,42 +38,8 @@
                 </div>
             </div>
 
-            <tal:item tal:repeat="item python: items[:2]">
-                <div class="col-lg">
-                  <div class="dynajet-box bg-white"
-                       tal:attributes="class python: 'dynajet-box bg-{}'.format(context.template_variant)">
-                    <div class="dynajet-image"
-                         tal:define="image_url python: image_helper.image_url(item)"
-                         tal:condition="python: image_url">
-                      <img class="d-block wh-100"
-                           src="/++plone++dynajet.site/tmp/dynajet-500me.jpg"
-                           alt="Dynajet 500me"
-                           tal:attributes="src python: image_url;
-                                           alt python: item.title;">
-                    </div>
-                    <div class="dynajet-content">
-                      <a tal:attributes="href python: item.absolute_url()">
-                        <h3 tal:content="python: plone_view.cropText(item.title, 48)">Titel</h3>
-                        <p tal:condition="python: item.description"
-                           tal:content="python: plone_view.cropText(item.description, 102)">Description</p>
-                      </a>
-                      <ul class="dynajet-icon-list bottom">
-                        <li>
-                          <a class="btn icon-dynajet-arrow"
-                             href="#"
-                             tal:attributes="href python: item.absolute_url()"
-                             tal:content="python: context.link_text">
-                            Mehr erfahren
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-            </tal:item>
-
             <div class="col-12 collapse" id="collapseText" tal:attributes="id python: 'collapse_' + context.id">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                <div class="row search-results row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
 
                     <div class="col" tal:repeat="item python: items">
                         <div class="result">
@@ -101,6 +68,43 @@
 
                 </div>
             </div>
+
+            <tal:item tal:repeat="item python: items[:2]">
+                <div class="col-12 col-lg-4">
+                  <div class="dynajet-box bg-white"
+                       tal:attributes="class python: 'dynajet-box bg-{}'.format(context.template_variant)">
+                    <div class="dynajet-image"
+                         tal:define="image_url python: image_helper.image_url(item)"
+                         tal:condition="python: image_url">
+                      <a tal:attributes="href python: item['url'];
+                                         title python: item['title'];">
+                        <img class="d-block wh-100"
+                             src="/++plone++dynajet.site/tmp/dynajet-500me.jpg"
+                             alt="Dynajet 500me"
+                             tal:attributes="src python: image_url;
+                                             alt python: item.title;">
+                      </a>
+                    </div>
+                    <div class="dynajet-content">
+                      <a tal:attributes="href python: item.absolute_url()">
+                        <h3 tal:content="python: plone_view.cropText(item.title, 48)">Titel</h3>
+                        <p tal:condition="python: item.description"
+                           tal:content="python: plone_view.cropText(item.description, 102)">Description</p>
+                      </a>
+                      <ul class="dynajet-icon-list bottom">
+                        <li>
+                          <a class="btn icon-dynajet-arrow"
+                             href="#"
+                             tal:attributes="href python: item.absolute_url()"
+                             tal:content="python: context.link_text">
+                            Mehr erfahren
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </tal:item>
 
             <div class="col-12" tal:condition="python: checkPermission('Modify portal content', context)">
                 <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"

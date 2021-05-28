@@ -1,4 +1,5 @@
 <metal:content-core define-macro="content-core"
+    i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
 
     <div class="row">

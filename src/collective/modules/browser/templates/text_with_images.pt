@@ -1,5 +1,6 @@
 <metal:module-core
     define-macro="module_core"
+    i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 image_helper nocall: context/@@image_helper;
                 plone_view nocall: context/@@plone;
@@ -25,9 +26,12 @@
               <div class="dynajet-box bg-gray">
                 <div class="dynajet-image"
                      tal:condition="python: image">
-                  <img class="d-block wh-100"
-                       tal:attributes="src python: url + '/@@images/image' + index + '/preview';
-                                       alt python: title;">
+                  <a tal:attributes="href python: link_url"
+                     tal:omit-tag="python: not link_url">
+                    <img class="d-block wh-100"
+                         tal:attributes="src python: url + '/@@images/image' + index + '/preview';
+                                         alt python: title;">
+                  </a>
                 </div>
                 <div class="dynajet-content">
                   <a tal:attributes="href python: link_url"
@@ -63,9 +67,12 @@
               <div class="dynajet-box bg-gray">
                 <div class="dynajet-image"
                      tal:condition="python: image">
-                  <img class="d-block wh-100"
-                       tal:attributes="src python: url + '/@@images/image' + index + '/preview';
-                                       alt python: title;">
+                  <a tal:attributes="href python: link_url"
+                     tal:omit-tag="python: not link_url">
+                    <img class="d-block wh-100"
+                         tal:attributes="src python: url + '/@@images/image' + index + '/preview';
+                                         alt python: title;">
+                  </a>
                 </div>
                 <div class="dynajet-content">
                   <a tal:attributes="href python: link_url"
@@ -101,9 +108,12 @@
               <div class="dynajet-box bg-gray">
                 <div class="dynajet-image"
                      tal:condition="python: image">
-                  <img class="d-block wh-100"
-                       tal:attributes="src python: url + '/@@images/image' + index + '/preview';
-                                       alt python: title;">
+                  <a tal:attributes="href python: link_url"
+                     tal:omit-tag="python: not link_url">
+                    <img class="d-block wh-100"
+                         tal:attributes="src python: url + '/@@images/image' + index + '/preview';
+                                         alt python: title;">
+                  </a>
                 </div>
                 <div class="dynajet-content">
                   <a tal:attributes="href python: link_url"

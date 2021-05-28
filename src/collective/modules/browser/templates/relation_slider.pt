@@ -1,9 +1,10 @@
 <metal:module-core define-macro="module_core"
-         tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
-        items python: context.items();
-        item python: items[0] if items else None;
-        image_helper nocall: context/@@image_helper;
-        plone_view nocall: context/@@plone;">
+    i18n:domain="collective.modules"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+                items python: context.items();
+                item python: items[0] if items else None;
+                image_helper nocall: context/@@image_helper;
+                plone_view nocall: context/@@plone;">
 
     <div class="col-sm-12 col-md-6 col-xl-4">
         <div class="dynajet-box bg-gray">
@@ -18,16 +19,21 @@
                          tal:define="active python:repeat['item'].start and ' active' or ''"
                          tal:attributes="class string:carousel-item${active}">
                         <div class="carousel-image">
+                          <a tal:attributes="href python: item['url'];
+                                             title python: item['title'];">
                             <img class="d-block wh-100"
                                  tal:define="image_url python: image_helper.image_url(item)"
                                  tal:condition="image_url"
                                  tal:attributes="src python: image_url;
                                                  alt python: item.title;" />
+                          </a>
                         </div>
                         <div class="dynajet-content">
-                            <h3 tal:content="python: plone_view.cropText(item.title, 48)">Title</h3>
-                            <p tal:condition="python: item.description"
-                               tal:content="python: plone_view.cropText(item.description, 102)">Description</p>
+                            <a tal:attributes="href python: item['url'];">
+                              <h3 tal:content="python: plone_view.cropText(item['title'], 48)">Title</h3>
+                              <p tal:condition="python: item['description']"
+                                 tal:content="python: plone_view.cropText(item['description'], 102)">Description</p>
+                            </a>
                             <ul class="dynajet-icon-list bg-blue bottom">
                                 <li>
                                     <a class="btn icon-dynajet-arrow"

@@ -57,8 +57,8 @@ class RedirectToParent(BrowserView):
 
     def __call__(self):
         parent = self.context.__parent__
-        self.request.response.redirect(parent.absolute_url())
-
+        anchor = f'#module_{self.context.id}'
+        self.request.response.redirect(f'{parent.absolute_url()}{anchor}')
 
 class ModuleBaseView(DefaultView):
     def __call__(self):
@@ -175,9 +175,14 @@ class FilterModuleView(ModuleBaseView):
     filter = ViewPageTemplateFile('templates/filter.pt')
 
     def results(self):
-        query = {'portal_type': self.context.portaltype}
-        if self.context.searchpath:
-            query['path'] = {'query': self.context.searchpath}
+        query = {
+            'portal_type': self.context.portaltype,
+            'sort_on': 'getObjPositionInParent',
+        }
+        if self.context.searchpath_uuid:
+            container = api.content.get(UID=self.context.searchpath_uuid)
+            if container:
+                query['path'] = {'query': '/'.join(container.getPhysicalPath())}
         portal_catalog = api.portal.get_tool('portal_catalog')
         image_helper = api.content.get_view('image_helper', self.context, self.request)
         index = portal_catalog._catalog.getIndex(self.context.index)

@@ -1,4 +1,5 @@
 <metal:content-core define-macro="content-core"
+    i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 filter_results python: view.results();
                 uuid python: context.UID()">
@@ -58,7 +59,7 @@
                                         <div class="input-group">
                                             <div class="select">
                                                 <select class="custom-select search-filter-options">
-                                                    <option value="" selected>Thema wählen</option>
+                                                    <option value="" selected i18n:translate="">Thema wählen</option>
                                                     <tal:options repeat="item python: filter_results">
                                                         <option value=""
                                                                 tal:attributes="value python: item['uid'];
@@ -79,11 +80,12 @@
                                                    type="radio"
                                                    name="radio_all"
                                                    id="radio_all"
-                                                   value="radio_all"
+                                                   value=""
                                                    tal:attributes="name python: form_name;
                                                                    id python: 'radio_all_' + uuid" />
                                             <label class="dynajet-control-label"
                                                    for="radio_all"
+                                                   i18n:translate=""
                                                    tal:attributes="for python: 'radio_all_' + uuid">Alle</label>
                                         </div>
                                         <tal:filter repeat="option python: view.filter_options()">
@@ -136,7 +138,7 @@
                     </div>
                     <div class="dynajet-btn-group bottom">
                         <a class="btn icon-dynajet-arrow" href="#"
-                           i18n:translate=""
+                           tal:content="python: context.link_text"
                            tal:attributes="href python: item['url'];
                                            title python: item['title']">Zum Artikel</a>
                     </div>

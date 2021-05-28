@@ -15,8 +15,6 @@ from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.interface import implementer
-from zope.interface import provider
-from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -323,11 +321,6 @@ filter_templates = SimpleVocabulary(
 )
 
 
-@provider(IContextAwareDefaultFactory)
-def current_path(context):
-    return context.absolute_url_path()
-
-
 class IFilterModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
@@ -353,6 +346,12 @@ class IFilterModule(IModuleBase):
         required=False,
     )
 
+    link_text = schema.TextLine(
+        title='Text for link',
+        default='Read more',
+        required=False,
+    )
+
     image = NamedBlobImage(
         title='Image',
         required=False,
@@ -372,10 +371,14 @@ class IFilterModule(IModuleBase):
         vocabulary='plone.app.vocabularies.UserFriendlyTypes',
     )
 
-    searchpath = schema.TextLine(
+    searchpath_uuid = schema.Choice(
         title='Pfad zum Einschränken der Inhalte',
-        defaultFactory=current_path,
+        vocabulary='plone.app.multilingual.RootCatalog',
         required=False,
+    )
+    directives.widget(
+        'searchpath_uuid',
+        RelatedItemsFieldWidget,
     )
 
     index = schema.Choice(

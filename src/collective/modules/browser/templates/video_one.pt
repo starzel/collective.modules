@@ -1,4 +1,5 @@
 <metal:module-core define-macro="module_core"
+    i18n:domain="collective.modules"
     tal:define="checkPermission python: context.restrictedTraverse('portal_membership').checkPermission;
                 video_infos python: view.video_infos()">
 

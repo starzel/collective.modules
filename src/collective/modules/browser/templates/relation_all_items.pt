@@ -1,5 +1,6 @@
 <metal:module-core
     define-macro="module_core"
+    i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 items python: context.items();
                 image_helper nocall: context/@@image_helper;">

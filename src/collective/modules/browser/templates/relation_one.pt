@@ -1,4 +1,5 @@
 <metal:module-core define-macro="module_core"
+    i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 items python: context.items();
                 item python: items[0] if items else None;
@@ -21,7 +22,7 @@
                         <div tal:condition="python: context.text"
                              tal:replace="structure python:context.text.output" />
                         <div class="dynajet-btn-group bottom">
-                            <a class="btn expand-collapse icon-dynajet-collapse"
+                            <a class="btn expand-collapse icon-dynajet-expand"
                                data-bs-toggle="collapse"
                                href="#collapseText"
                                role="button"
@@ -82,7 +83,8 @@
                     <div class="dynajet-btn-group bottom">
                         <a class="btn icon-dynajet-arrow bottom" href="#"
                            tal:attributes="href python: item.absolute_url();
-                                           title python: item.title;">Mehr erfahren</a>
+                                           title python: item['title'];"
+                           tal:content="python: context.link_text">Mehr erfahren</a>
                     </div>
                 </div>
             </div>
