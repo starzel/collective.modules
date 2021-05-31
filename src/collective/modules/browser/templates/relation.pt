@@ -6,78 +6,29 @@
                 image_helper nocall: context/@@image_helper;
                 plone_view nocall: context/@@plone;">
 
-    <div class="dynajet-wrapper module"
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
          tal:attributes="id python: 'module_' + context.getId()">
-        <div class="row">
-            <div class="col-12 mb-3" tal:condition="python: context.title and context.title != 'None' or context.description">
-                <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
-                <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
-            </div>
+        <div tal:condition="python: context.title or context.description">
+            <h3 class="strong sans-h6 a-center" tal:condition="python: context.title" tal:content="python: context.title">Title</h3>
+            <h4 class="module__subtitle strong a-center" tal:condition="python: context.description" tal:content="python: context.description">Description</h4>
 
-            <div class="col-lg">
-                <div class="dynajet-box bg-white"
-                     tal:attributes="class python: 'dynajet-box bg-{}'.format(context.template_variant)">
-                    <div class="dynajet-content">
-                        <span tal:condition="python: context.text"
-                        tal:content="structure python:context.text.output" />
+            <p class="module__text" tal:condition="python: context.text" tal:content="structure python: context.text.output">Text</p>
 
-                        <div class="dynajet-btn-group bottom" tal:condition="python: len(items) > 2">
-                            <a class="btn expand-collapse icon-dynajet-expand collapse-relation"
-                               data-bs-toggle="collapse"
-                               href="#collapseText"
-                               role="button"
-                               aria-expanded="false"
-                               aria-controls="collapseText"
-                               tal:content="python: context.expand_button_text"
-                               tal:attributes="href python: '#collapse_' + context.id;
-                                               aria-controls python: 'collapse_' + context.id">
-                                Show all
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
 
-            <div class="col-12 collapse" id="collapseText" tal:attributes="id python: 'collapse_' + context.id">
-                <div class="row search-results row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+        <div class="stop">
 
-                    <div class="col" tal:repeat="item python: items">
-                        <div class="result">
-                            <div class="result__image">
-                                <a class="result__image__shadow" href="#"
-                                   tal:attributes="href python: item.absolute_url();
-                                                   title python: item.title;">
-                                    <img class="w-100"
-                                         tal:define="image_url python: image_helper.image_url(item)"
-                                         tal:condition="image_url"
-                                         tal:attributes="src python: image_url;
-                                                         alt python: item.title;" />
-                                </a>
-                            </div>
-                            <div class="result__body">
-                                <h5 tal:content="python: plone_view.cropText(item.title, 102)">Title</h5>
-                            </div>
-                            <div class="dynajet-btn-group bottom">
-                                <a class="btn icon-dynajet-arrow" href="#"
-                                   i18n:translate=""
-                                   tal:attributes="href python: item.absolute_url();
-                                                   title python: item.title">Mehr erfahren</a>
-                            </div>
-                        </div>
-                    </div>
+            <ol class="flow-ml flickity-flow">
 
-                </div>
-            </div>
+              <tal:item tal:repeat="item python: items">
+                <li class="teaser-item teaser-item-post">
 
-            <tal:item tal:repeat="item python: items[:2]">
-                <div class="col-12 col-lg-4">
-                  <div class="dynajet-box bg-white"
-                       tal:attributes="class python: 'dynajet-box bg-{}'.format(context.template_variant)">
                     <div class="dynajet-image"
                          tal:define="image_url python: image_helper.image_url(item)"
-                         tal:condition="python: image_url">
-                      <a tal:attributes="href python: item['url'];
-                                         title python: item['title'];">
+                         tal:condition="python: image_url"
+                         tal:replace="nothing">
+                      <a tal:attributes="href python: item.absolute_url();
+                                         title python: item.title;">
                         <img class="d-block wh-100"
                              src="/++plone++dynajet.site/tmp/dynajet-500me.jpg"
                              alt="Dynajet 500me"
@@ -85,35 +36,35 @@
                                              alt python: item.title;">
                       </a>
                     </div>
-                    <div class="dynajet-content">
-                      <a tal:attributes="href python: item.absolute_url()">
-                        <h3 tal:content="python: plone_view.cropText(item.title, 48)">Titel</h3>
-                        <p tal:condition="python: item.description"
-                           tal:content="python: plone_view.cropText(item.description, 102)">Description</p>
-                      </a>
-                      <ul class="dynajet-icon-list bottom">
-                        <li>
-                          <a class="btn icon-dynajet-arrow"
-                             href="#"
-                             tal:attributes="href python: item.absolute_url()"
-                             tal:content="python: context.link_text">
-                            Mehr erfahren
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-            </tal:item>
 
-            <div class="col-12" tal:condition="python: checkPermission('Modify portal content', context)">
-                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                <a tal:attributes="href python: item.absolute_url();
+                                   title python: item.title;">
+                <div class="link-outer stack-xs">
+                    <div class="stack-xxs">
+                        <p tal:content="python: plone_view.cropText(item.title, 48)">Überraschende Erkenntnis</p>
+                        <h4 class="sans-t2 strong" tal:content="python: plone_view.cropText(item.description, 102)">Falsche Vorstellungen von den Zusammenhängen in der Natur halten sich bei Kindern oft hartnäckig.  Eine Studie zeigt jetzt: Experimente mit überraschendem Ausgang helfen, diese nachhaltig zu korrigieren.   </h4>
+                    </div>
+                    <p class="teaser-link sans-m2 strong">
+                        <span class="btn-link btn-s btn-icon-left trim">
+                            <span class="text" tal:content="python: context.link_text">mehr lesen</span>
+                        </span>
+                    </p>
+                </div>
+                </a>
+
+                </li>
+              </tal:item>
+
+            </ol>
+
+            <div tal:condition="python: checkPermission('Modify portal content', context)">
+                <a class="btn btn-primary btn-sm float-right" data-pat-plone-modal="width: 100%"
                    tal:condition="python: checkPermission('Modify portal content', context)"
                    tal:attributes="href python: context.absolute_url() + '/edit'">
                     Edit Module
                 </a>
             </div>
         </div>
-    </div>
+    </section>
 
 </metal:module-core>
