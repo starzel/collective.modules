@@ -1,0 +1,103 @@
+<metal:module-core
+    define-macro="module_core"
+    i18n:domain="collective.modules"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+                items python: context.items();
+                image_helper nocall: context/@@image_helper;
+                plone_view nocall: context/@@plone;
+                link_url python:view.link_url(context.link);">
+
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
+         tal:attributes="id python: 'module_' + context.getId()">
+
+        <div tal:condition="python: context.title or context.description">
+            <h3 class="strong sans-h6 a-center"
+                tal:condition="python: context.title and context.display_title"
+                tal:content="python: context.title">
+                Title
+            </h3>
+            <h4 class="module__subtitle strong a-center"
+                tal:condition="python: context.description"
+                tal:content="python: context.description">
+                Description
+            </h4>
+            <p class="module__text"
+               tal:condition="python: context.text"
+               tal:content="structure python: context.text.output">
+               Text
+            </p>
+        </div>
+
+        <div class="stop">
+            <ol class="flow-ml flickity-flow flickity-resized">
+              <tal:item tal:repeat="item python: items">
+                <li class="teaser-item teaser-item-event cell"
+                    tal:define="tag python: image_helper.image_url(item, scale='custom_tag')">
+                    <a class="link-outer flow-m teaser-item-inner"
+                       tal:attributes="href python: item.absolute_url();
+                                       title python: item.title;">
+                        <div class="item-illu d-none d-block__s">
+                            <div class="hold-img"
+                                 style="padding-bottom: 133.33333333333334%;">
+                                <img tal:replace="structure python: tag"
+                                     width="261"
+                                     height="348">
+                            </div>
+                        </div>
+
+                        <div class="item-text">
+                            <div class="item-text-inner stack-xs">
+                                <div class="sans-h2b strong"
+                                     tal:define="start python: getattr(item, 'start', False);"
+                                     tal:condition="python: start">
+                                    <span class="nobr"
+                                          tal:content="python: start.strftime('%d.%m.')">01.06.</span>
+                                </div>
+                                <div class="stack-xxs">
+                                    <p class="mono-i1">
+                                        <span tal:content="python: item.description" />
+                                        <span tal:condition="python: getattr(item, 'location', False)"
+                                              tal:content="python: ' · ' + item.location" />
+                                    </p>
+                                    <h4 class="sans-t2 strong"
+                                        tal:content="python: item.title">
+                                        Title
+                                    </h4>
+                                </div>
+                                <p class="teaser-link sans-m2 strong">
+                                    <span class="btn-link btn-s btn-icon-left trim">
+                                        <span class="text"
+                                              tal:content="python: context.link_text">Zum Termin
+                                        </span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+              </tal:item>
+            </ol>
+        </div>
+
+        <div class="stack-s"
+             tal:condition="python: link_url">
+            <div class="a-center">
+                <a class="btn-ghost btn"
+                   tal:attributes="href python: link_url"
+                   tal:content="python: context.link_button_text">
+                    To Link
+                </a>
+            </div>
+        </div>
+
+        <div tal:condition="python: checkPermission('Modify portal content', context)">
+            <a class="btn btn-primary btn-sm"
+               tal:condition="python: checkPermission('Modify portal content', context)"
+               tal:attributes="href python: context.absolute_url() + '/edit'">
+                Edit Module
+            </a>
+        </div>
+
+    </section>
+
+</metal:module-core>

@@ -114,15 +114,8 @@ class SimpleTextModule(Item):
 
 relationmodule_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='blue', title='Blue background, white text'),
-        SimpleTerm(value='white', title='White background, black/blue Text'),
-        SimpleTerm(value='gray', title='Gray background, black/blue Text'),
-        SimpleTerm(value='one', title='One large item and a blue teaser'),
-        SimpleTerm(value='all_items', title='All items in blocks'),
-        SimpleTerm(
-            value='all_items_gray', title='All items in blocks - gray background'
-        ),
-        SimpleTerm(value='slider', title='Slider with teaser images'),
+        SimpleTerm(value='default', title='Default'),
+        SimpleTerm(value='events', title='Events (todo)'),
     ]
 )
 
@@ -141,9 +134,15 @@ class IRelationModule(IModuleBase):
         required=False,
     )
 
-    expand_button_text = schema.TextLine(
-        title='Text of expand-Button',
+    link_button_text = schema.TextLine(
+        title='Text of Link-Button',
         default='Show all',
+        required=False,
+    )
+
+    directives.widget(link=LinkFieldWidget)
+    link = schema.TextLine(
+        title='Link target',
         required=False,
     )
 
@@ -190,6 +189,8 @@ class RelationModule(Item):
         if collection.query:
             collection_results = [i.getObject() for i in collection.results()]
             results += [i for i in collection_results if i not in results]
+        if collection.limit and len(results) > collection.limit:
+            results = results[:collection.limit]
         return results
 
 

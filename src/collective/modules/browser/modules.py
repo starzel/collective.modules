@@ -142,13 +142,11 @@ class SimpleTextModuleView(ModuleBaseView):
 
 class RelationModuleView(ModuleBaseView):
 
-    blue = ViewPageTemplateFile('templates/relation.pt')
-    white = ViewPageTemplateFile('templates/relation.pt')
-    gray = ViewPageTemplateFile('templates/relation.pt')
-    one = ViewPageTemplateFile('templates/relation_one.pt')
-    all_items = ViewPageTemplateFile('templates/relation_all_items.pt')
-    all_items_gray = ViewPageTemplateFile('templates/relation_all_items_gray.pt')
-    slider = ViewPageTemplateFile('templates/relation_slider.pt')
+    default = ViewPageTemplateFile('templates/relation.pt')
+    events = ViewPageTemplateFile('templates/relation_events.pt')
+
+    def link_url(self, url):
+        return link_url(url, self.context, self.request)
 
 
 class GalleryModuleView(ModuleBaseView):

@@ -14,6 +14,12 @@ class ImageHelper(BrowserView):
     def image_url(self, obj, scale='preview'):
         """Get a url for a image depending on what type it is."""
 
+        # 0. events (tag with cropped scale)
+        if scale == 'custom_tag':
+            images = obj.restrictedTraverse('@@images')
+            tag = images.tag(fieldname='image', height=348, width=261, alt=obj.title, css_class="abs-trbl", direction="down")
+            return tag
+
         # 1. Leadimage (News Items, Images etc.)
         if getattr(obj.aq_base, 'image', None):
             return f'{obj.absolute_url()}/@@images/image/{scale}'
