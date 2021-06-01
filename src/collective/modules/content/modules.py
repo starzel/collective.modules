@@ -46,11 +46,6 @@ class ITextModule(IModuleBase):
         required=False,
     )
 
-    navigation_title = schema.TextLine(
-        title='Title in Navigation',
-        required=False,
-    )
-
     text1 = RichText(
         title='Text Block 1',
         required=False,
@@ -141,11 +136,6 @@ class IRelationModule(IModuleBase):
         required=False,
     )
 
-    navigation_title = schema.TextLine(
-        title='Title for Navigation',
-        required=False,
-    )
-
     text = RichText(
         title='Text',
         required=False,
@@ -163,6 +153,14 @@ class IRelationModule(IModuleBase):
         required=False,
     )
 
+    directives.widget(template_variant=RadioFieldWidget)
+    template_variant = schema.Choice(
+        title='Variation',
+        vocabulary=relationmodule_templates,
+        required=False,
+        default='default',
+    )
+
     relations = RelationList(
         title='Anzuzeigende Inhalte',
         description='Diese Inhalte werden vor den Ergebnissen des Feldes "Suchbegriffe" angezeigt.',
@@ -178,14 +176,6 @@ class IRelationModule(IModuleBase):
         pattern_options={
             'basePath': make_relation_root_path,
         },
-    )
-
-    directives.widget(template_variant=RadioFieldWidget)
-    template_variant = schema.Choice(
-        title='Variation',
-        vocabulary=relationmodule_templates,
-        required=False,
-        default='blue',
     )
 
 
@@ -213,11 +203,6 @@ gallerymodule_templates = SimpleVocabulary(
 class IGalleryModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
-    navigation_title = schema.TextLine(
-        title='Title in Navigation',
-        required=False,
-    )
-
     text = RichText(
         title='Text',
         required=False,
@@ -227,6 +212,14 @@ class IGalleryModule(IModuleBase):
         title='Show images that are inside this folder',
         required=False,
         default=True,
+    )
+
+    directives.widget(template_variant=RadioFieldWidget)
+    template_variant = schema.Choice(
+        title='Variation',
+        vocabulary=gallerymodule_templates,
+        required=False,
+        default='gallery',
     )
 
     relations = RelationList(
@@ -245,14 +238,6 @@ class IGalleryModule(IModuleBase):
             'selectableTypes': ['Image'],
             # 'basePath': make_relation_root_path,
         },
-    )
-
-    directives.widget(template_variant=RadioFieldWidget)
-    template_variant = schema.Choice(
-        title='Variation',
-        vocabulary=gallerymodule_templates,
-        required=False,
-        default='gallery',
     )
 
 
@@ -619,11 +604,6 @@ class IBannerModule(IModuleBase):
     display_title = schema.Bool(
         title='Display title?',
         default=True,
-        required=False,
-    )
-
-    navigation_title = schema.TextLine(
-        title='Title in Navigation',
         required=False,
     )
 
