@@ -56,7 +56,7 @@
 
         <div class="row edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
             <div class="col-12">
-                <a class="btn btn-primary btn-sm pat-plone-modal float-right" data-pat-plone-modal="width: 100%"
+                <a class="btn btn-primary btn-sm  float-right"
                    tal:condition="python: checkPermission('Modify portal content', context)"
                    tal:attributes="href python: context.absolute_url() + '/edit'">
                     Edit Module
