@@ -31,20 +31,13 @@
         <div class="stop">
             <ol class="flow-ml flickity-flow flickity-resized">
               <tal:item tal:repeat="item python: items">
-                <li class="teaser-item teaser-item-event cell"
+                <li class="teaser-item teaser-item-press cell"
                     tal:define="tag python: image_helper.image_url(item, scale='custom_tag');
-                                is_event python: item.portal_type == 'Event';">
+                                is_event python: item.portal_type == 'Event';
+                                is_news python: item.portal_type == 'News Item';">
                     <a class="link-outer flow-m teaser-item-inner"
                        tal:attributes="href python: item.absolute_url();
                                        title python: item.title;">
-                        <div class="item-illu d-none d-block__s">
-                            <div class="hold-img"
-                                 style="padding-bottom: 133.33333333333334%;">
-                                <img tal:replace="structure python: tag"
-                                     width="261"
-                                     height="348">
-                            </div>
-                        </div>
 
                         <div class="item-text">
                             <div class="item-text-inner stack-xs">
@@ -52,8 +45,15 @@
                                      tal:define="start python: getattr(item, 'start', False);"
                                      tal:condition="python: is_event and start">
                                     <span class="nobr"
+                                          tal:content="python: start.strftime('%d.%m.')">01.06.</span>
+                                </div>
+                                <div class="stack-xxs strong"
+                                     tal:define="start python: item.effective();"
+                                     tal:condition="python: is_news">
+                                    <span class="nobr"
                                           tal:content="python: start.strftime('%d.%m.%Y')">01.06.</span>
                                 </div>
+
                                 <div class="stack-xxs">
                                     <p class="mono-i1"
                                        tal:condition="python: is_event">

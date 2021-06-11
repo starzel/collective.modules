@@ -60,6 +60,7 @@ class RedirectToParent(BrowserView):
         anchor = f'#module_{self.context.id}'
         self.request.response.redirect(f'{parent.absolute_url()}{anchor}')
 
+
 class ModuleBaseView(DefaultView):
     def __call__(self):
         if self.__name__ == 'full_module':
@@ -144,6 +145,8 @@ class RelationModuleView(ModuleBaseView):
 
     default = ViewPageTemplateFile('templates/relation.pt')
     events = ViewPageTemplateFile('templates/relation_events.pt')
+    two_item_row_without_images = ViewPageTemplateFile('templates/relation_two_item_row_without_images.pt')
+    three_item_row = ViewPageTemplateFile('templates/relation_three_item_row.pt')
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
