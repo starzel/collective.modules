@@ -18,7 +18,7 @@
                      tal:attributes="class python: 'dynajet-full bg-{}'.format(context.template_variant)">
                     <div class="dynajet-background">
                         <img tal:condition="python: context.image"
-                             tal:attributes="src python: context.absolute_url() + '/@@images/image/gallery';
+                             tal:attributes="src python: context.absolute_url() + '/@@images/image/banner';
                                              alt python: context.title"
                              class="wh-100">
                         <div class="dynajet-large top"
