@@ -1,6 +1,7 @@
 from collective.modules.behaviors.modules import IModules
 from collective.modules.utils import link_url
 from plone import api
+from plone.app.event.base import dates_for_display
 from plone.dexterity.browser.view import DefaultView
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import BoundPageTemplate
@@ -150,6 +151,9 @@ class RelationModuleView(ModuleBaseView):
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
+
+    def dates_for_display(self, event):
+        return dates_for_display(event)
 
 
 class GalleryModuleView(ModuleBaseView):

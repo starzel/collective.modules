@@ -48,12 +48,25 @@
 
                         <div class="item-text">
                             <div class="item-text-inner stack-xs">
-                                <div class="sans-h2b strong"
-                                     tal:define="start python: getattr(item, 'start', False);"
-                                     tal:condition="python: is_event and start">
-                                    <span class="nobr"
-                                          tal:content="python: start.strftime('%d.%m.%Y')">01.06.</span>
-                                </div>
+                                <tal:date tal:define="start python: getattr(item, 'start', False);
+                                                      end python: getattr(item, 'end', False);"
+                                          tal:condition="python: is_event and start">
+                                    <div class="sans-h2b strong"
+                                         tal:define="dates_for_display python: view.dates_for_display(item);">
+                                        <tal:sameday tal:condition="python: dates_for_display['same_day']">
+                                            <span class="nobr"
+                                                  tal:content="python: start.strftime('%d.%m.')">01.06.</span>
+                                        </tal:sameday>
+
+                                        <tal:multiday tal:condition="python: not dates_for_display['same_day']">
+                                            <span class="nobr">
+                                              <span tal:replace="python: start.strftime('%d.%m.')" />
+                                              <span>–</span>
+                                            </span>
+                                            <span tal:content="python: end.strftime('%d.%m.')" />
+                                        </tal:multiday>
+                                    </div>
+                                </tal:date>
                                 <div class="stack-xxs">
                                     <p class="mono-i1"
                                        tal:condition="python: is_event">
