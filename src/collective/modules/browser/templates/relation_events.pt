@@ -57,7 +57,9 @@
                                 <div class="stack-xxs">
                                     <p class="mono-i1"
                                        tal:condition="python: is_event">
-                                        <span tal:content="python: getattr(item, 'event_type', None)" />
+                                        <span tal:define="event_category python: getattr(item, 'event_category', [])"
+                                              tal:condition="python: event_category"
+                                              tal:content="python: ', '.join(event_category)" />
                                         <span tal:condition="python: getattr(item, 'location', False)"
                                               tal:content="python: ' · ' + item.location" />
                                     </p>
