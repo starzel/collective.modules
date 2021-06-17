@@ -35,17 +35,19 @@
             <div class="col-md-1 d-none d-md-block"></div>
             <div class="col-sm-12 col-md-7 mb-4"
                  tal:condition="python: context.text3">
-                <a class="dipf-more"
-                   data-bs-toggle="collapse"
-                   href="#collapseText"
-                   role="button"
-                   aria-expanded="false"
-                   aria-controls="collapseText"
-                   i18n:translate=""
-                   tal:attributes="href python: '#collapse_' + context.id;
-                                   aria-controls python: 'collapse_' + context.id">
-                  Text weiterlesen
-                </a>
+                <p class="teaser-link sans-m2 strong">
+                    <a class="btn-link btn-s btn-icon-left trim"
+                       data-bs-toggle="collapse"
+                       href="#collapseText"
+                       role="button"
+                       aria-expanded="false"
+                       aria-controls="collapseText"
+                       i18n:translate=""
+                       tal:attributes="href python: '#collapse_' + context.id;
+                                       aria-controls python: 'collapse_' + context.id">
+                        <span class="text">Text weiterlesen</span>
+                    </a>
+                </p>
             </div>
         </div>
 
