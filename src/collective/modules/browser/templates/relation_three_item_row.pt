@@ -33,7 +33,7 @@
               <tal:item tal:repeat="item python: items">
                 <li class="teaser-item teaser-item-post">
 
-                    <div class=""
+                    <div class="mb-4"
                          tal:define="images nocall:item/@@images;
                                      tag python: images.tag(fieldname='image', width=261, height=348, alt=item.title, direction='down');"
                          tal:condition="python: tag">
@@ -43,7 +43,8 @@
                       </a>
                     </div>
 
-                    <a tal:attributes="href python: item.absolute_url();
+                    <a class="full-text-link"
+                       tal:attributes="href python: item.absolute_url();
                                        title python: item.title;">
                         <div class="link-outer stack-xs">
                             <div class="stack-xxs">
