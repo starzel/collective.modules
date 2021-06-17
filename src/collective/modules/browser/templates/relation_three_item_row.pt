@@ -39,7 +39,7 @@
                          tal:condition="python: tag">
                       <a tal:attributes="href python: item.absolute_url();
                                          title python: item.title;">
-                        <img tal:replace="structure python: tag">
+                        <img tal:replace="structure python: tag" />
                       </a>
                     </div>
 
