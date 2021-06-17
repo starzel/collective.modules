@@ -109,9 +109,7 @@ class VideoModuleView(ModuleBaseView):
 class TextModuleView(ModuleBaseView):
 
     text = ViewPageTemplateFile('templates/text.pt')
-    text_one_two = ViewPageTemplateFile('templates/text_one_two.pt')
     text_expandable = ViewPageTemplateFile('templates/text_expandable.pt')
-    text_full_blue = ViewPageTemplateFile('templates/text_full_blue.pt')
 
 
 class TextWithImagesModuleView(ModuleBaseView):

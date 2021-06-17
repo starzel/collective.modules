@@ -23,12 +23,8 @@ from zope.schema.vocabulary import SimpleVocabulary
 text_templates = SimpleVocabulary(
     [
         SimpleTerm(value='text', title='Three columns'),
-        SimpleTerm(value='text_one_two', title='1/3, 2/3 and one full row'),
         SimpleTerm(
             value='text_expandable', title='Two 1/3 columns and a expandable block'
-        ),
-        SimpleTerm(
-            value='text_full_blue', title='Full width, blue background, white text'
         ),
     ]
 )
@@ -65,7 +61,6 @@ class ITextModule(IModuleBase):
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
         title='Variation',
-        description='Für einzelnen 2/3-breiten Text die Option 2 wählen und nur Text Block 2 füllen',
         vocabulary=text_templates,
         required=False,
         default='text',
