@@ -1,6 +1,12 @@
 <metal:module-core define-macro="module_core"
     i18n:domain="collective.modules"
-    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
+    tal:define="checkPermission python: context.restrictedTraverse('portal_membership').checkPermission;
+                count python: 0;
+                count python: count + 0 if context.text1 is None else count + 1;
+                count python: count + 0 if context.text2 is None else count + 1;
+                count python: count + 0 if context.text3 is None else count + 1;
+                col_lg python: int(12 / count) if count > 0 else 12;
+                col_md python: 6 if count > 1 else 12;">
 
     <div class="dynajet-wrapper module"
          tal:attributes="id python: 'module_' + context.getId()">
@@ -13,18 +19,21 @@
 
         <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container"
-                tal:condition="python: context.text1"
-                tal:content="structure python:context.text1.output">
+                 tal:attributes="class python: 'col-sm-12 col-md-' + str(col_md) + ' col-lg-' + str(col_lg) + ' mb-4 text-container'"
+                 tal:condition="python: context.text1"
+                 tal:content="structure python:context.text1.output">
             </div>
 
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container"
-                tal:condition="python: context.text2"
-                tal:content="structure python:context.text2.output">
+                 tal:attributes="class python: 'col-sm-12 col-md-' + str(col_md) + ' col-lg-' + str(col_lg) + ' mb-4 text-container'"
+                 tal:condition="python: context.text2"
+                 tal:content="structure python:context.text2.output">
             </div>
 
             <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container"
-                tal:condition="python: context.text3"
-                tal:content="structure python:context.text3.output">
+                 tal:attributes="class python: 'col-sm-12 col-md-' + str(col_md) + ' col-lg-' + str(col_lg) + ' mb-4 text-container'"
+                 tal:condition="python: context.text3"
+                 tal:content="structure python:context.text3.output">
             </div>
         </div>
 
