@@ -16,7 +16,7 @@
                 tal:content="python: context.title">
                 Title
             </h3>
-            <h4 class="module__subtitle strong a-center"
+            <h4 class="sans-h6 a-center"
                 tal:condition="python: context.description"
                 tal:content="python: context.description">
                 Description
