@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-md-1 d-none d-md-block"></div>
 
-            <div class="col-sm-12 col-md-7 mb-4 text-container"
+            <div class="col-sm-12 col-md-7 mb-4 text-container plain-txt"
                  tal:condition="python: context.text1">
                 <div tal:replace="structure python:context.text1.output">
                     Text 1
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-3 mb-4 text-container"
+            <div class="col-sm-12 col-md-3 mb-4 text-container plain-txt"
                  tal:condition="python: context.text2"
                  tal:content="structure python:context.text2.output">
                 Text 2
@@ -55,7 +55,7 @@
              tal:condition="python: context.text3"
              tal:attributes="id python: 'collapse_' + context.id">
             <div class="col-md-1 d-none d-md-block"></div>
-            <div class="col-sm-12 col-md-7 mb-3 text-container"
+            <div class="col-sm-12 col-md-7 mb-3 text-container plain-txt"
                  tal:content="structure python:context.text3.output">
                 Collapsed Text 3
             </div>

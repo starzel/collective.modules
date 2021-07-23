@@ -18,19 +18,19 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container"
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container plain-txt"
                  tal:attributes="class python: 'col-sm-12 col-md-' + str(col_md) + ' col-lg-' + str(col_lg) + ' mb-4 text-container'"
                  tal:condition="python: context.text1"
                  tal:content="structure python:context.text1.output">
             </div>
 
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container"
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container plain-txt"
                  tal:attributes="class python: 'col-sm-12 col-md-' + str(col_md) + ' col-lg-' + str(col_lg) + ' mb-4 text-container'"
                  tal:condition="python: context.text2"
                  tal:content="structure python:context.text2.output">
             </div>
 
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container"
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container plain-txt"
                  tal:attributes="class python: 'col-sm-12 col-md-' + str(col_md) + ' col-lg-' + str(col_lg) + ' mb-4 text-container'"
                  tal:condition="python: context.text3"
                  tal:content="structure python:context.text3.output">
