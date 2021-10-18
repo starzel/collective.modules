@@ -161,6 +161,7 @@ class RelationModuleView(ModuleBaseView):
             transforms = api.portal.get_tool("portal_transforms")
             text = transforms.convertTo("text/plain", obj.text.output, mimetype=obj.text.mimeType).getData()
             return text
+        return ''
 
 
 class GalleryModuleView(ModuleBaseView):
