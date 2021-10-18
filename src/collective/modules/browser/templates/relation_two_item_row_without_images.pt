@@ -67,7 +67,7 @@
                                     </h4>
                                     <p class="sans-t2"
                                        tal:condition="python: not is_event"
-                                       tal:content="python: plone_view.cropText(item.description, 130)">
+                                       tal:content="python: plone_view.cropText(view.description(item), 130)">
                                         Description
                                     </p>
                                 </div>

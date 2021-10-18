@@ -1,5 +1,6 @@
 from collective.modules import _
 from collective.relationhelpers import api as relapi
+from logging import getLogger
 from plone.app.contenttypes.behaviors.collection import ICollection
 from plone.app.multilingual.browser.interfaces import make_relation_root_path
 from plone.app.textfield import RichText
@@ -19,6 +20,7 @@ from zope.interface import implementer
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
+log = getLogger(__name__)
 
 text_templates = SimpleVocabulary(
     [
@@ -110,7 +112,7 @@ class SimpleTextModule(Item):
 
 relationmodule_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='default', title=_('Default')),
+        SimpleTerm(value='default', title=_('3 columns, no image, all items displayed')),
         SimpleTerm(value='events', title=_('2 items per row with image (events and media)')),
         SimpleTerm(value='two_item_row_without_images', title=_('2 items per row without image (press releases )')),
         SimpleTerm(value='three_item_row', title=_('3 items per row with images above each item (apropos)')),

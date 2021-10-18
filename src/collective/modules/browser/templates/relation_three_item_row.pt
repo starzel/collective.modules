@@ -52,7 +52,7 @@
                                     Title
                                 </p>
                                 <h4 class="sans-t2 strong"
-                                    tal:content="python: plone_view.cropText(item.description, 150)">
+                                    tal:content="python: plone_view.cropText(view.description(item), 150)">
                                     Description
                                 </h4>
                             </div>

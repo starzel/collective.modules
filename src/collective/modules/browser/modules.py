@@ -153,6 +153,15 @@ class RelationModuleView(ModuleBaseView):
     def dates_for_display(self, event):
         return dates_for_display(event)
 
+    def description(self, obj):
+        """Get text in case description is empty"""
+        if getattr(obj.aq_base, "description"):
+            return obj.description
+        if getattr(obj.aq_base, "text") and obj.text.output:
+            transforms = api.portal.get_tool("portal_transforms")
+            text = transforms.convertTo("text/plain", obj.text.output, mimetype=obj.text.mimeType).getData()
+            return text
+
 
 class GalleryModuleView(ModuleBaseView):
 
