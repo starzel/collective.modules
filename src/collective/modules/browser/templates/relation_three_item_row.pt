@@ -48,13 +48,13 @@
                                        title python: item.title;">
                         <div class="link-outer stack-xs">
                             <div class="stack-xxs">
-                                <p tal:content="python: item.title">
-                                    Title
-                                </p>
                                 <h4 class="sans-t2 strong"
-                                    tal:content="python: plone_view.cropText(view.description(item), 150)">
-                                    Description
+                                    tal:content="python: item.title">
+                                    Title
                                 </h4>
+                                <p tal:content="python: plone_view.cropText(view.description(item), 150)">
+                                    Description
+                                </p>
                             </div>
                             <p class="teaser-link sans-m2 strong">
                                 <span class="btn-link btn-s btn-icon-left trim">
