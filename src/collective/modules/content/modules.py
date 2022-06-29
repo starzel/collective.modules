@@ -593,7 +593,6 @@ class TextWithImagesModule(Item):
 
 banner_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='blue', title='Blue background, white text'),
         SimpleTerm(value='gray', title='Gray background, black/blue Text'),
     ]
 )
@@ -613,6 +612,9 @@ class IBannerModule(IModuleBase):
         required=False,
     )
 
+    # Hidden as requested: https://support.starzel.de/issues/11761
+    # Some objects still have content
+    directives.mode(text='hidden')
     text = RichText(
         title='Text Block',
         required=False,
@@ -635,7 +637,7 @@ class IBannerModule(IModuleBase):
         title='Variation',
         vocabulary=banner_templates,
         required=True,
-        default='blue',
+        default='gray',
     )
 
 
