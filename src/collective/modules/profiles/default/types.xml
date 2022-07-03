@@ -4,6 +4,7 @@
  <!-- modules -->
  <object meta_type="Dexterity FTI" name="textmodule" />
  <object meta_type="Dexterity FTI" name="relationmodule" />
+ <object meta_type="Dexterity FTI" name="mediathekmodule" />
  <object meta_type="Dexterity FTI" name="gallerymodule" />
  <object meta_type="Dexterity FTI" name="bannermodule" />
 

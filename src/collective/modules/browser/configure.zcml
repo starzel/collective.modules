@@ -186,4 +186,19 @@
       permission="zope2.View"
       />
 
+  <browser:page
+    name="inner_module"
+    for="collective.modules.content.modules.IMediathekModule"
+    class=".modules.MediathekModuleView"
+    template="templates/mediathek.pt"
+    permission="zope2.View"
+  />
+
+  <browser:page
+    name="full_module"
+    for="collective.modules.content.modules.IMediathekModule"
+    class=".modules.MediathekModuleView"
+    template="templates/full_module.pt"
+    permission="zope2.View"
+  />
 </configure>

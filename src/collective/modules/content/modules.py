@@ -644,3 +644,36 @@ class IBannerModule(IModuleBase):
 @implementer(IBannerModule)
 class BannerModule(Item):
     """Module instance class"""
+
+
+class IMediathekModule(IModuleBase):
+    """Dexterity-Schema for Module"""
+
+    display_title = schema.Bool(
+        title='Display title?',
+        default=True,
+        required=False,
+    )
+
+    link1_button_text = schema.TextLine(
+        title='Text of first Link-Button',
+        default='Show all',
+        required=False,
+    )
+
+    directives.widget(link1=LinkFieldWidget)
+    link1 = schema.TextLine(
+        title='First Link target',
+        required=False,
+    )
+
+    link1_text = schema.TextLine(
+        title='Text for the first link to each item',
+        default='Read more',
+        required=False,
+    )
+
+
+@implementer(IMediathekModule)
+class MediathekModule(Item):
+    """Module instance class"""

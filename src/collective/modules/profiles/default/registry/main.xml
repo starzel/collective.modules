@@ -9,6 +9,7 @@
       <element>relationmodule</element>
       <element>textmodule</element>
       <element>bannermodule</element>
+      <element>mediathekmodule</element>
     </value>
   </record>
 
