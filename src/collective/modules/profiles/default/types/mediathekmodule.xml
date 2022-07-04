@@ -24,7 +24,6 @@
  <property name="schema">collective.modules.content.modules.IMediathekModule</property>
  <property name="behaviors">
   <element value="plone.dublincore"/>
-  <element value="plone.collection" />
   <element value="plone.namefromtitle"/>
   <element value="plone.versioning" />
   <element value="plone.translatable"/>

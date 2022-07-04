@@ -239,6 +239,3 @@ class FilterModuleView(ModuleBaseView):
 class MediathekModuleView(ModuleBaseView):
 
     mediathek = ViewPageTemplateFile('templates/mediathek.pt')
-
-    def link_url(self, url):
-        return link_url(url, self.context, self.request)

@@ -13,7 +13,6 @@ except ImportError:
 class ImageHelper(BrowserView):
     def image_url(self, obj, scale='preview'):
         """Get a url for a image depending on what type it is."""
-
         # 0. events (tag with cropped scale)
         if scale == 'custom_tag':
             images = obj.restrictedTraverse('@@images')
