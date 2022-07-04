@@ -699,6 +699,18 @@ class IMediathekModule(IModuleBase):
         default='mediathek',
     )
 
+    directives.widget(link=LinkFieldWidget)
+    link = schema.TextLine(
+        title='Link target',
+        required=False,
+    )
+
+    link_text = schema.TextLine(
+        title='Text for link',
+        default='Read more',
+        required=False,
+    )
+
     link1_button_text = schema.TextLine(
         title='Text of first Link-Button',
         default='More information',
@@ -708,6 +720,11 @@ class IMediathekModule(IModuleBase):
     link1_categorie = schema.TextLine(
         title='Text for the first link categorie',
         default='Podcast',
+        required=False,
+    )
+
+    link1_image = NamedBlobImage(
+        title='First link image',
         required=False,
     )
 
@@ -723,6 +740,11 @@ class IMediathekModule(IModuleBase):
         required=False,
     )
 
+    link2_image = NamedBlobImage(
+        title='Second link image',
+        required=False,
+    )
+
     link3_button_text = schema.TextLine(
         title='Text of third Link-Button',
         default='More information',
@@ -732,6 +754,11 @@ class IMediathekModule(IModuleBase):
     link3_categorie = schema.TextLine(
         title='Text for the third link to each item',
         default='Podcast',
+        required=False,
+    )
+
+    link3_image = NamedBlobImage(
+        title='Third link image',
         required=False,
     )
 
@@ -747,6 +774,10 @@ class IMediathekModule(IModuleBase):
         required=False,
     )
 
+    link4_image = NamedBlobImage(
+        title='Fourth link image',
+        required=False,
+    )
 
 @implementer(IMediathekModule)
 class MediathekModule(Item):
