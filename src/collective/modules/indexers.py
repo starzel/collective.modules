@@ -18,6 +18,7 @@ def searchable_text_modules(obj):
             'portal_type': [
                 'textmodule',
                 'relationmodule',
+                'mediathekmodule',
                 'videomodule',
                 'gallerymodule',
                 'simpletextmodule',

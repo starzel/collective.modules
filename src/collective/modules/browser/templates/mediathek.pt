@@ -1,0 +1,95 @@
+<metal:module-core
+  define-macro="module_core"
+   i18n:domain="collective.modules"
+   tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+               links python: context.items();
+               link_url python:view.link_url(context.link);
+               image_helper nocall: context/@@image_helper;">
+
+  <section
+    class="teaser-flow stack-ml pr-2 pl-2 pt-4 push-ml module mediathek bleed frame"
+     tal:attributes="id python: 'module_' + context.getId()">
+
+    <div tal:condition="python: context.title or context.description">
+      <h2 class="strong sans-h6 a-center"
+         tal:condition="python: context.title and context.display_title"
+         tal:content="python: context.title">
+        Title
+      </h2>
+      <p
+         tal:condition="python: context.description"
+         tal:content="python: context.description">
+        Description
+      </p>
+    </div>
+
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
+
+          <div class="col" tal:repeat="item python: links">
+            <div class="result stack-xxs"
+               tal:define="index repeat/item/number;
+              link_button_text python:getattr(context, 'link{}_button_text'.format(str(index)), None);
+              link_image python:getattr(context, 'link{}_image'.format(str(index)), None);
+              link_categorie python:getattr(context, 'link{}_categorie'.format(str(index)), None);">
+              <a tal:attributes="href python: item.absolute_url();" href="" class="full-text-link">
+
+              <div class="result__image mb-4">
+                <span class="result__image__shadow">
+                <img
+                   tal:define="image_url python: '{}/@@images/{}/preview'.format(context.absolute_url(),'link{}_image'.format(str(index)))"
+                   tal:condition="link_image"
+                   tal:attributes="src python: image_url;
+                  alt python: item.title;" />
+              </span>
+              </div>
+                <div class="dipf-border"></div>
+                <div class="result__body mt-4">
+                  <div>
+                    <p tal:content="python:link_categorie"></p>
+                    <h4 class="sans-t2 strong mt-2" tal:content="python: item.title">
+                      Title</h4>
+                  </div>
+                </div>
+
+                <p class="teaser-link sans-m2 strong mt-3">
+                  <span class="btn-link btn-s btn-icon-left trim">
+                    <span i18n:translate=""
+                       tal:content="python: link_button_text"
+                      class="text">weitere Informationen</span>
+                    </span>
+                </p>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-s mb-4"
+       tal:condition="python: link_url">
+      <div class="a-center">
+        <a class="btn-ghost btn"
+           tal:attributes="href python: link_url"
+           tal:content="python: context.link_text">
+          To Link
+        </a>
+      </div>
+    </div>
+
+    <div class="row mt-0 mb-2" tal:condition="python: checkPermission('Modify portal content', context)">
+      <div
+        class="col-12" >
+        <a class="btn btn-primary btn-sm  float-right"
+           tal:condition="python: checkPermission('Modify portal content', context)"
+           tal:attributes="href python: context.absolute_url() + '/edit'">
+          Edit Module
+        </a>
+      </div>
+    </div>
+  </section>
+
+</metal:module-core>

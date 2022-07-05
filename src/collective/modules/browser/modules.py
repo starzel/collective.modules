@@ -234,3 +234,11 @@ class FilterModuleView(ModuleBaseView):
     def module_image_url(self):
         if getattr(self.context.aq_base, 'image', None):
             return f'{self.context.absolute_url()}/@@images/image/preview'
+
+
+class MediathekModuleView(ModuleBaseView):
+
+    mediathek = ViewPageTemplateFile('templates/mediathek.pt')
+
+    def link_url(self, url):
+        return link_url(url, self.context, self.request)

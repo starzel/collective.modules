@@ -26,7 +26,8 @@ text_templates = SimpleVocabulary(
     [
         SimpleTerm(value='text', title='Three columns'),
         SimpleTerm(
-            value='text_expandable', title='One 2/3 column, one 1/3 column and a expandable block below'
+            value='text_expandable',
+            title='One 2/3 column, one 1/3 column and a expandable block below'
         ),
     ]
 )
@@ -60,12 +61,19 @@ class ITextModule(IModuleBase):
         required=False,
     )
 
-    directives.widget(template_variant=RadioFieldWidget)
-    template_variant = schema.Choice(
-        title='Variation',
-        vocabulary=text_templates,
+    text1 = RichText(
+        title='Text Block 1',
         required=False,
-        default='text',
+    )
+
+    text2 = RichText(
+        title='Text Block 2',
+        required=False,
+    )
+
+    text3 = RichText(
+        title='Text Block 3',
+        required=False,
     )
 
 
@@ -112,10 +120,14 @@ class SimpleTextModule(Item):
 
 relationmodule_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='default', title=_('3 columns, no image, all items displayed')),
-        SimpleTerm(value='events', title=_('2 items per row with image (events and media)')),
-        SimpleTerm(value='two_item_row_without_images', title=_('2 items per row without image (press releases )')),
-        SimpleTerm(value='three_item_row', title=_('3 items per row with images above each item (apropos)')),
+        SimpleTerm(value='default',
+                   title=_('3 columns, no image, all items displayed')),
+        SimpleTerm(value='events',
+                   title=_('2 items per row with image (events and media)')),
+        SimpleTerm(value='two_item_row_without_images',
+                   title=_('2 items per row without image (press releases )')),
+        SimpleTerm(value='three_item_row',
+                   title=_('3 items per row with images above each item (apropos)')),
     ]
 )
 
@@ -644,3 +656,134 @@ class IBannerModule(IModuleBase):
 @implementer(IBannerModule)
 class BannerModule(Item):
     """Module instance class"""
+
+
+mediathek_templates = SimpleVocabulary(
+    [
+        SimpleTerm(value='mediathek', title='Default Mediathek'),
+    ]
+)
+
+
+class IMediathekModule(IModuleBase):
+    """Dexterity-Schema for Module"""
+
+    display_title = schema.Bool(
+        title='Display title?',
+        default=True,
+        required=False,
+    )
+
+    relations = RelationList(
+        title='Anzuzeigende Inhalte',
+        description='Diese Inhalte werden vor den Ergebnissen des Feldes "Suchbegriffe" angezeigt.',
+        default=[],
+        value_type=RelationChoice(vocabulary='plone.app.multilingual.RootCatalog'),
+        required=False,
+        missing_value=[],
+    )
+    directives.widget(
+        'relations',
+        RelatedItemsFieldWidget,
+        vocabulary='plone.app.multilingual.RootCatalog',
+        pattern_options={
+            'basePath': make_relation_root_path,
+        },
+    )
+
+    directives.widget(template_variant=RadioFieldWidget)
+    template_variant = schema.Choice(
+        title='Variation',
+        vocabulary=mediathek_templates,
+        required=False,
+        default='mediathek',
+    )
+
+    directives.widget(link=LinkFieldWidget)
+    link = schema.TextLine(
+        title='Link target',
+        required=False,
+    )
+
+    link_text = schema.TextLine(
+        title='Text for link',
+        default='Read more',
+        required=False,
+    )
+
+    link1_button_text = schema.TextLine(
+        title='Text of first Link-Button',
+        default='More information',
+        required=False,
+    )
+
+    link1_categorie = schema.TextLine(
+        title='Text for the first link categorie',
+        default='Podcast',
+        required=False,
+    )
+
+    link1_image = NamedBlobImage(
+        title='First link image',
+        required=False,
+    )
+
+    link2_button_text = schema.TextLine(
+        title='Text of second Link-Button',
+        default='More information',
+        required=False,
+    )
+
+    link2_categorie = schema.TextLine(
+        title='Text for the second link categorie',
+        default='Podcast',
+        required=False,
+    )
+
+    link2_image = NamedBlobImage(
+        title='Second link image',
+        required=False,
+    )
+
+    link3_button_text = schema.TextLine(
+        title='Text of third Link-Button',
+        default='More information',
+        required=False,
+    )
+
+    link3_categorie = schema.TextLine(
+        title='Text for the third link to each item',
+        default='Podcast',
+        required=False,
+    )
+
+    link3_image = NamedBlobImage(
+        title='Third link image',
+        required=False,
+    )
+
+    link4_button_text = schema.TextLine(
+        title='Text of fourth Link-Button',
+        default='More information',
+        required=False,
+    )
+
+    link4_categorie= schema.TextLine(
+        title='Text for the fourth link categorie',
+        default='More information',
+        required=False,
+    )
+
+    link4_image = NamedBlobImage(
+        title='Fourth link image',
+        required=False,
+    )
+
+@implementer(IMediathekModule)
+class MediathekModule(Item):
+    """Module instance class"""
+
+    def items(self):
+        # A list of items to display.
+        results = relapi.relations(self, attribute='relations')
+        return results
