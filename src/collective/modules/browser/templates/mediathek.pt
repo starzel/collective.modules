@@ -7,7 +7,7 @@
                image_helper nocall: context/@@image_helper;">
 
   <section
-    class="teaser-flow stack-ml teaser-flow-posts push-ml module mediathek"
+    class="teaser-flow stack-ml pr-2 pl-2 pt-4 push-ml module mediathek bleed frame"
      tal:attributes="id python: 'module_' + context.getId()">
 
     <div tal:condition="python: context.title or context.description">
@@ -24,7 +24,7 @@
     </div>
 
 
-    <div class="row">
+    <div class="row mt-4">
       <div class="col-12">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
 
@@ -46,15 +46,15 @@
               </span>
               </div>
                 <div class="dipf-border"></div>
-                <div class="result__body mt-4 ">
+                <div class="result__body mt-4">
                   <div>
                     <p tal:content="python:link_categorie"></p>
-                    <h4 class="sans-t2 strong " tal:content="python: item.title">
+                    <h4 class="sans-t2 strong mt-2" tal:content="python: item.title">
                       Title</h4>
                   </div>
                 </div>
 
-                <p class="teaser-link sans-m2 strong">
+                <p class="teaser-link sans-m2 strong mt-3">
                   <span class="btn-link btn-s btn-icon-left trim">
                     <span i18n:translate=""
                        tal:content="python: link_button_text"
@@ -69,7 +69,7 @@
       </div>
     </div>
 
-    <div class="stack-s"
+    <div class="stack-s mb-4"
        tal:condition="python: link_url">
       <div class="a-center">
         <a class="btn-ghost btn"
@@ -80,9 +80,9 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-0 mb-2" tal:condition="python: checkPermission('Modify portal content', context)">
       <div
-        class="col-12" tal:condition="python: checkPermission('Modify portal content', context)">
+        class="col-12" >
         <a class="btn btn-primary btn-sm  float-right"
            tal:condition="python: checkPermission('Modify portal content', context)"
            tal:attributes="href python: context.absolute_url() + '/edit'">
