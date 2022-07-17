@@ -124,6 +124,7 @@ class BannerModuleView(ModuleBaseView):
 
     blue = ViewPageTemplateFile('templates/banner.pt')
     gray = ViewPageTemplateFile('templates/banner.pt')
+    leibniz = ViewPageTemplateFile('templates/banner_leibniz.pt')
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)

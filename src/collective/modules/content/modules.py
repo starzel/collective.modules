@@ -595,6 +595,7 @@ banner_templates = SimpleVocabulary(
     [
         SimpleTerm(value='blue', title='Blue background, white text'),
         SimpleTerm(value='gray', title='Gray background, black/blue Text'),
+        SimpleTerm(value='leibniz', title='2/3 Image, 1/3 Text with light blue background'),
     ]
 )
 
