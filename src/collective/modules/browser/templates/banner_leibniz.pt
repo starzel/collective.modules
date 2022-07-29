@@ -3,10 +3,10 @@
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 link_url python:view.link_url(context.link);">
 
-    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module banner_leibniz"
          tal:attributes="id python: 'module_' + context.getId()">
 
-        <div class="advert-custom bg-gumleaf stop">
+        <div class="advert-custom bg-dipf-blue stop">
             <a tal:attributes="href python: link_url" class="link-outer flow-m">
                 <div class="advert-illu cell">
                     <div class="advert-illu-inner rel">
@@ -24,12 +24,12 @@
                 <div class="advert-main cell">
                     <div class="advert-main-inner stack-m px-xs pb-s py-m__m pl-0__m">
                         <div class="stack-xxs">
-                            <p class="mono-i1" tal:content="python: context.description">
+                            <p tal:content="python: context.description">
                                 Description
                             </p>
-                            <h4 class="sans-h4 strong" tal:content="python: context.title">
+                            <h3 class="strong" tal:content="python: context.title">
                                 Title
-                            </h4>
+                            </h3>
                             <span tal:condition="python: context.text">
                                 <div tal:replace="structure python:context.text.output" />
                             </span>
