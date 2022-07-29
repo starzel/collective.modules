@@ -1,0 +1,59 @@
+<metal:module-core define-macro="module_core"
+    i18n:domain="collective.modules"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+                link_url python:view.link_url(context.link);">
+
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
+         tal:attributes="id python: 'module_' + context.getId()">
+
+        <div class="advert-custom bg-gumleaf stop">
+            <a tal:attributes="href python: link_url" class="link-outer flow-m">
+                <div class="advert-illu cell">
+                    <div class="advert-illu-inner rel">
+                        <!--illustration-->
+                        <div class="abs-trbl">
+                            <img tal:condition="python: context.image"
+                                 tal:attributes="src python: context.absolute_url() + '/@@images/image/banner';
+                                                 alt python: context.title"
+                                 width="765" height="430">
+                        </div>
+                        <!--/illustration-->
+                    </div>
+                </div>
+
+                <div class="advert-main cell">
+                    <div class="advert-main-inner stack-m px-xs pb-s py-m__m pl-0__m">
+                        <div class="stack-xxs">
+                            <p class="mono-i1" tal:content="python: context.description">
+                                Description
+                            </p>
+                            <h4 class="sans-h4 strong" tal:content="python: context.title">
+                                Title
+                            </h4>
+                            <span tal:condition="python: context.text">
+                                <div tal:replace="structure python:context.text.output" />
+                            </span>
+                        </div>
+                        <div class="sans-m2 strong">
+                            <span class="btn-link btn-s btn-icon-left trim">
+                                <span class="text" tal:content="python: context.link_text">To Link</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col-12 edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
+                <a class="btn btn-primary btn-sm  float-right"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </section>
+
+</metal:module-core>
