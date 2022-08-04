@@ -4,7 +4,8 @@
    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                links python: context.items();
                link_url python:view.link_url(context.link);
-               image_helper nocall: context/@@image_helper;">
+               image_helper nocall: context/@@image_helper;
+               modified python: context.ModificationDate();">
 
   <section
     class="teaser-flow stack-ml pr-2 pl-2 pt-4 push-ml module mediathek bleed frame"
@@ -39,7 +40,8 @@
               <div class="result__image mb-4">
                 <span class="result__image__shadow">
                 <img
-                   tal:define="image_url python: '{}/@@images/{}/preview'.format(context.absolute_url(),'link{}_image'.format(str(index)))"
+                   tal:define="field_name python: 'link{}_image'.format(index);
+                               image_url python: '{}/@@images/{}/preview?v={}'.format(context.absolute_url(), field_name, modified)"
                    tal:condition="link_image"
                    tal:attributes="src python: image_url;
                   alt python: item.title;" />
