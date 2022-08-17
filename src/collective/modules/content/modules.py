@@ -61,20 +61,11 @@ class ITextModule(IModuleBase):
         required=False,
     )
 
-    text1 = RichText(
-        title='Text Block 1',
-        required=False,
-    )
-
-    text2 = RichText(
-        title='Text Block 2',
-        required=False,
-    )
-
-    text3 = RichText(
-        title='Text Block 3',
-        required=False,
-    )
+    directives.widget(template_variant=RadioFieldWidget)
+    template_variant = schema.Choice(
+        title='Variation',
+        vocabulary=text_templates,
+        default='text',)
 
 
 @implementer(ITextModule)
