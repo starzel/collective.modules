@@ -2,12 +2,12 @@
     i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
 
-    <div class="dynajet-wrapper module"
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
          tal:attributes="id python: 'module_' + context.getId()">
         <div class="row">
             <div class="col-md-1 d-none d-md-block"></div>
             <div class="col-md-11 col-sm-12 mb-3" tal:condition="python: context.display_title and context.title">
-                <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>
+                <h3 class="module__title strong sans-h6 a-center" tal:condition="python: context.title" tal:content="python: context.title">Title</h3>
                 <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
             </div>
         </div>
@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-md-1 d-none d-md-block"></div>
 
-            <div class="col-sm-12 col-md-7 mb-4 text-container plain-txt"
+            <div class="col-sm-12 col-md-7 mb-4 text-container sans-t2 plain-txt"
                  tal:condition="python: context.text1">
                 <div tal:replace="structure python:context.text1.output">
                     Text 1
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-3 mb-4 text-container plain-txt"
+            <div class="col-sm-12 col-md-3 mb-4 text-container sans-t2 plain-txt"
                  tal:condition="python: context.text2"
                  tal:content="structure python:context.text2.output">
                 Text 2
@@ -70,6 +70,6 @@
                 </a>
             </div>
         </div>
-    </div>
+    </section>
 
 </metal:module-core>
