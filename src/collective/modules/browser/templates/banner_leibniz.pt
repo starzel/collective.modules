@@ -27,7 +27,7 @@
                             <p tal:content="python: context.description">
                                 Description
                             </p>
-                            <h3 class="strong" tal:content="python: context.title">
+                            <h3 class="module__title strong sans-h6" tal:content="python: context.title">
                                 Title
                             </h3>
                             <span tal:condition="python: context.text">

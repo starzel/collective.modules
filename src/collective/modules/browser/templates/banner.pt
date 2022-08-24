@@ -3,15 +3,15 @@
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 link_url python:view.link_url(context.link);">
 
-    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module banner plain-txt"
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module banner"
          tal:attributes="id python: 'module_' + context.getId()">
 
         <div tal:condition="python: context.title or context.description">
-            <h2 class="strong sans-h6 a-center"
+            <h3 class="module__title strong sans-h6 a-center"
                 tal:condition="python: context.title and context.display_title"
                 tal:content="python: context.title">
                 Title
-            </h2>
+            </h3>
             <p
                 tal:condition="python: context.description"
                 tal:content="python: context.description">
