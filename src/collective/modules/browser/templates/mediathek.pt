@@ -56,7 +56,7 @@
                   </div>
                 </div>
 
-                <p class="teaser-link sans-m2 strong mt-3">
+                <p class="teaser-link sans-m2 strong mt-3 mb-md-5">
                   <span class="btn-link btn-s btn-icon-left trim">
                     <span i18n:translate=""
                        tal:content="python: link_button_text"
