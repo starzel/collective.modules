@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-3 mb-4 text-container sans-t2 plain-txt"
+            <div class="col-sm-12 col-md-4 mb-4 text-container sans-t2 plain-txt"
                  tal:condition="python: context.text2"
                  tal:content="structure python:context.text2.output">
                 Text 2

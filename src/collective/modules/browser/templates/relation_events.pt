@@ -7,7 +7,7 @@
                 plone_view nocall: context/@@plone;
                 link_url python:view.link_url(context.link);">
 
-    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module relation"
          tal:attributes="id python: 'module_' + context.getId()">
 
         <div tal:condition="python: context.title or context.description">
