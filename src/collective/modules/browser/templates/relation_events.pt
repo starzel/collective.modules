@@ -32,18 +32,14 @@
             <ol class="flow-ml flickity-flow flickity-resized">
               <tal:item tal:repeat="item python: items">
                 <li class="teaser-item teaser-item-event cell"
-                    tal:define="tag python: image_helper.image_url(item, scale='custom_tag');
+                    tal:define="images nocall:item/@@images;
+                                tag python: images.tag(fieldname='image', width=261, height=348, alt=item.title, direction='down');
                                 is_event python: item.portal_type == 'Event';">
                     <a class="link-outer flow-m teaser-item-inner"
                        tal:attributes="href python: item.absolute_url();
                                        title python: item.title;">
-                        <div class="item-illu d-none d-block__s">
-                            <div class="hold-img"
-                                 style="padding-bottom: 133.33333333333334%;">
-                                <img tal:replace="structure python: tag"
-                                     width="261"
-                                     height="348">
-                            </div>
+                        <div class="item-illu d-block__s">
+                                <img tal:replace="structure python: tag">
                         </div>
 
                         <div class="item-text">
