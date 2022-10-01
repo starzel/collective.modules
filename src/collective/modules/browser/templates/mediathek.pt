@@ -29,7 +29,7 @@
       <div class="col-12">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
 
-          <div class="col" tal:repeat="item python: links">
+          <div class="col mb-5 mb-sm-0 mb-md-0 mb-lg-0 mb-xl-0" tal:repeat="item python: links">
             <div class="result stack-xxs"
                tal:define="index repeat/item/number;
               link_button_text python:getattr(context, 'link{}_button_text'.format(str(index)), None);
