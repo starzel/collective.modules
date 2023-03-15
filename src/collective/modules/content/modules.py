@@ -1,6 +1,6 @@
 from collective.modules import _
-from collective.relationhelpers import api as relapi
 from logging import getLogger
+from plone import api
 from plone.app.contenttypes.behaviors.collection import ICollection
 from plone.app.multilingual.browser.interfaces import make_relation_root_path
 from plone.app.textfield import RichText
@@ -187,7 +187,7 @@ class RelationModule(Item):
 
     def items(self):
         # A list of items to display.
-        results = relapi.relations(self, attribute='relations')
+        results = [i.to_object for i in api.relation.get(source=self, relationship='relations')]
         collection = ICollection(self)
         if collection.query:
             collection_results = [i.getObject() for i in collection.results()]
@@ -255,7 +255,7 @@ class GalleryModule(Container):
         if self.show_contained_images:
             results += self.contentValues(filter={'portal_type': 'Image'})
 
-        results += relapi.relations(self, attribute='relations')
+        results += [i.to_object for i in api.relation.get(source=self, relationship='relations')]
         collection = ICollection(self)
         if collection.query:
             collection_results = [i.getObject() for i in collection.results()]
@@ -450,7 +450,7 @@ class VideoModule(Item):
 
     def items(self):
         # A list of items to display.
-        results = relapi.relations(self, attribute='relations')
+        results = [i.to_object for i in api.relation.get(source=self, relationship='relations')]
         collection = ICollection(self)
         if collection.query:
             collection_results = [i.getObject() for i in collection.results()]
@@ -777,5 +777,5 @@ class MediathekModule(Item):
 
     def items(self):
         # A list of items to display.
-        results = relapi.relations(self, attribute='relations')
-        return results
+        results = api.relation.get(source=self, relationship='relations')
+        return [i.to_object for i in results]
