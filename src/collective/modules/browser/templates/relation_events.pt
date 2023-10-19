@@ -21,11 +21,11 @@
                 tal:content="python: context.description">
                 Description
             </h4>
-            <p class="module__text"
+            <div class="module__text plain-txt"
                tal:condition="python: context.text"
                tal:content="structure python: context.text.output">
                Text
-            </p>
+            </div>
         </div>
 
         <div class="stop">
