@@ -16,7 +16,7 @@ class ImageHelper(BrowserView):
         # 0. events (tag with cropped scale)
         if scale == 'custom_tag':
             images = obj.restrictedTraverse('@@images')
-            tag = images.tag(fieldname='image', height=348, width=261, alt=obj.title, css_class="abs-trbl", direction="down")
+            tag = images.tag(fieldname='image', height=348, width=261, alt=obj.title, css_class="abs-trbl", mode="contain")
             return tag
 
         # 1. Leadimage (News Items, Images etc.)

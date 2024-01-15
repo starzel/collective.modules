@@ -33,7 +33,7 @@
               <tal:item tal:repeat="item python: items">
                 <li class="teaser-item teaser-item-event cell"
                     tal:define="images nocall:item/@@images;
-                                tag python: images.tag(fieldname='image', width=261, height=348, alt=item.title, direction='down');
+                                tag python: images.tag(fieldname='image', width=261, height=348, alt=item.title, mode='contain');
                                 is_event python: item.portal_type == 'Event';">
                     <a class="link-outer flow-m teaser-item-inner"
                        tal:attributes="href python: item.absolute_url();
