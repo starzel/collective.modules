@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="advert-main cell">
-                    <div class="advert-main-inner stack-m px-xs pb-s py-m__m pl-0__m">
+                    <div class="advert-main-inner stack-m px-xs pb-s py-m__m">
                         <div class="stack-xxs">
                             <p tal:content="python: context.description">
                                 Description
