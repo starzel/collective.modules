@@ -8,7 +8,7 @@
                modified python: context.ModificationDate();">
 
   <section
-    class="teaser-flow stack-ml pr-2 pl-2 pt-4 push-ml module mediathek bleed frame"
+    class="teaser-flow stack-ml pr-2 pl-2 pt-4 push-ml module mediathek"
      tal:attributes="id python: 'module_' + context.getId()">
 
     <div tal:condition="python: context.title or context.description">
