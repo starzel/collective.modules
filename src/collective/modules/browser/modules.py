@@ -2,6 +2,7 @@ from collective.modules.behaviors.modules import IModules
 from collective.modules.utils import link_url
 from plone import api
 from plone.app.event.base import dates_for_display
+from plone.app.textfield.value import RichTextValue
 from plone.dexterity.browser.view import DefaultView
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import BoundPageTemplate
@@ -156,9 +157,13 @@ class RelationModuleView(ModuleBaseView):
 
     def description(self, obj):
         """Get text in case description is empty"""
-        if getattr(obj.aq_base, "description"):
+        if getattr(obj.aq_base, "description", None):
             return obj.description
-        if getattr(obj.aq_base, "text") and obj.text.output:
+        if (
+            getattr(obj.aq_base, "text", None)
+            and isinstance(obj.text, RichTextValue)
+            and obj.text.output
+        ):
             transforms = api.portal.get_tool("portal_transforms")
             text = transforms.convertTo("text/plain", obj.text.output, mimetype=obj.text.mimeType).getData()
             return text
