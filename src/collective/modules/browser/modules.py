@@ -164,6 +164,9 @@ class RelationModuleView(ModuleBaseView):
     three_item_row_portrait = ViewPageTemplateFile(
         "templates/relation_three_item_row_portrait.pt"
     )
+    three_item_row_landingpages = ViewPageTemplateFile(
+        "templates/relation_three_item_row_landingpages.pt"
+    )
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)

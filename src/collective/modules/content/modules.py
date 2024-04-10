@@ -130,6 +130,12 @@ relationmodule_templates = SimpleVocabulary(
             value="three_item_row_portrait",
             title=_("3 items per row with portrait images above each item (apropos)"),
         ),
+        SimpleTerm(
+            value="three_item_row_landingpages",
+            title=_(
+                "3 items per row with with 2/1 images and background color (landingpages)"
+            ),
+        ),
     ]
 )
 
