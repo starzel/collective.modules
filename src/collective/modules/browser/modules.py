@@ -151,6 +151,7 @@ class RelationModuleView(ModuleBaseView):
         "templates/relation_two_item_row_without_images.pt"
     )
     three_item_row = ViewPageTemplateFile("templates/relation_three_item_row.pt")
+    three_item_row_portrait = ViewPageTemplateFile("templates/relation_three_item_row_portrait.pt")
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
