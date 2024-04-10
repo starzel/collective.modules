@@ -10,10 +10,10 @@ from zope.interface import provider
 class IModules(model.Schema):
     """Schema for Modules Behavior"""
 
-    directives.omitted(IAddForm, 'modules')
+    directives.omitted(IAddForm, "modules")
     modules = schema.List(
-        title='Modules',
-        value_type=schema.Choice(vocabulary='collective.modules.container_modules'),
+        title="Modules",
+        value_type=schema.Choice(vocabulary="collective.modules.container_modules"),
         required=False,
         default=[],
         missing_value=[],

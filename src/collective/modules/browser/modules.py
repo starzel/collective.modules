@@ -12,6 +12,7 @@ from zope.schema.interfaces import IVocabularyFactory
 
 try:
     from wildcard.media.interfaces import IVideoEnabled
+
     HAS_WILDCARD_VIDEO = True
 except ImportError:
     HAS_WILDCARD_VIDEO = False
@@ -29,7 +30,7 @@ class ModulesView(BrowserView):
             wrapped = IModules(self.context)
         except TypeError:
             return results
-        catalog = api.portal.get_tool('portal_catalog')
+        catalog = api.portal.get_tool("portal_catalog")
         for uid in wrapped.modules:
             brains = catalog(UID=uid)
             if len(brains) != 1:
@@ -38,17 +39,17 @@ class ModulesView(BrowserView):
         return results
 
     def render_module(self, module):
-        view = module.restrictedTraverse('@@inner_module')
+        view = module.restrictedTraverse("@@inner_module")
         return view.render_core()
 
     def navigation(self):
         results = []
         for obj in self.get_modules():
-            if getattr(obj, 'navigation_title', None):
+            if getattr(obj, "navigation_title", None):
                 results.append(
                     {
-                        'id': 'module_' + obj.getId(),
-                        'title': obj.navigation_title,
+                        "id": "module_" + obj.getId(),
+                        "title": obj.navigation_title,
                     }
                 )
         return results
@@ -59,18 +60,18 @@ class RedirectToParent(BrowserView):
 
     def __call__(self):
         parent = self.context.__parent__
-        anchor = f'#module_{self.context.id}'
-        self.request.response.redirect(f'{parent.absolute_url()}{anchor}')
+        anchor = f"#module_{self.context.id}"
+        self.request.response.redirect(f"{parent.absolute_url()}{anchor}")
 
 
 class ModuleBaseView(DefaultView):
     def __call__(self):
-        if self.__name__ == 'full_module':
+        if self.__name__ == "full_module":
             return self.index()
         return self.render_core()
 
     def render_core(self):
-        variant = getattr(self.context, 'template_variant', None)
+        variant = getattr(self.context, "template_variant", None)
 
         if isinstance(getattr(self, variant, None), BoundPageTemplate):
             template = getattr(self, variant)
@@ -81,27 +82,27 @@ class ModuleBaseView(DefaultView):
 
 class VideoModuleView(ModuleBaseView):
 
-    video = ViewPageTemplateFile('templates/video.pt')
-    video_one = ViewPageTemplateFile('templates/video_one.pt')
+    video = ViewPageTemplateFile("templates/video.pt")
+    video_one = ViewPageTemplateFile("templates/video_one.pt")
 
     def video_infos(self):
         results = []
         for obj in self.context.items():
             if not HAS_WILDCARD_VIDEO or not IVideoEnabled.providedBy(obj):
                 continue
-            video_view = obj.restrictedTraverse('@@wildcard_video_view')
+            video_view = obj.restrictedTraverse("@@wildcard_video_view")
 
             embed_url = video_view.get_embed_url()
             youtube_url = embed_url.replace(
-                'www.youtube.com', 'www.youtube-nocookie.com'
+                "www.youtube.com", "www.youtube-nocookie.com"
             )
 
             results.append(
                 {
-                    'title': obj.Title(),
-                    'width': obj.width,
-                    'height': obj.height,
-                    'youtube_url': youtube_url,
+                    "title": obj.Title(),
+                    "width": obj.width,
+                    "height": obj.height,
+                    "youtube_url": youtube_url,
                 }
             )
         return results
@@ -109,13 +110,13 @@ class VideoModuleView(ModuleBaseView):
 
 class TextModuleView(ModuleBaseView):
 
-    text = ViewPageTemplateFile('templates/text.pt')
-    text_expandable = ViewPageTemplateFile('templates/text_expandable.pt')
+    text = ViewPageTemplateFile("templates/text.pt")
+    text_expandable = ViewPageTemplateFile("templates/text_expandable.pt")
 
 
 class TextWithImagesModuleView(ModuleBaseView):
 
-    text_with_images = ViewPageTemplateFile('templates/text_with_images.pt')
+    text_with_images = ViewPageTemplateFile("templates/text_with_images.pt")
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
@@ -123,9 +124,9 @@ class TextWithImagesModuleView(ModuleBaseView):
 
 class BannerModuleView(ModuleBaseView):
 
-    blue = ViewPageTemplateFile('templates/banner.pt')
-    gray = ViewPageTemplateFile('templates/banner.pt')
-    leibniz = ViewPageTemplateFile('templates/banner_leibniz.pt')
+    blue = ViewPageTemplateFile("templates/banner.pt")
+    gray = ViewPageTemplateFile("templates/banner.pt")
+    leibniz = ViewPageTemplateFile("templates/banner_leibniz.pt")
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
@@ -133,21 +134,23 @@ class BannerModuleView(ModuleBaseView):
 
 class SimpleTextModuleView(ModuleBaseView):
 
-    blue = ViewPageTemplateFile('templates/simpletext.pt')
-    white = ViewPageTemplateFile('templates/simpletext.pt')
-    gray = ViewPageTemplateFile('templates/simpletext.pt')
+    blue = ViewPageTemplateFile("templates/simpletext.pt")
+    white = ViewPageTemplateFile("templates/simpletext.pt")
+    gray = ViewPageTemplateFile("templates/simpletext.pt")
 
     def image_url(self):
-        if getattr(self.context.aq_base, 'image', None):
-            return f'{self.context.absolute_url()}/@@images/image/preview'
+        if getattr(self.context.aq_base, "image", None):
+            return f"{self.context.absolute_url()}/@@images/image/preview"
 
 
 class RelationModuleView(ModuleBaseView):
 
-    default = ViewPageTemplateFile('templates/relation.pt')
-    events = ViewPageTemplateFile('templates/relation_events.pt')
-    two_item_row_without_images = ViewPageTemplateFile('templates/relation_two_item_row_without_images.pt')
-    three_item_row = ViewPageTemplateFile('templates/relation_three_item_row.pt')
+    default = ViewPageTemplateFile("templates/relation.pt")
+    events = ViewPageTemplateFile("templates/relation_events.pt")
+    two_item_row_without_images = ViewPageTemplateFile(
+        "templates/relation_two_item_row_without_images.pt"
+    )
+    three_item_row = ViewPageTemplateFile("templates/relation_three_item_row.pt")
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
@@ -165,23 +168,25 @@ class RelationModuleView(ModuleBaseView):
             and obj.text.output
         ):
             transforms = api.portal.get_tool("portal_transforms")
-            text = transforms.convertTo("text/plain", obj.text.output, mimetype=obj.text.mimeType).getData()
+            text = transforms.convertTo(
+                "text/plain", obj.text.output, mimetype=obj.text.mimeType
+            ).getData()
             return text
-        return ''
+        return ""
 
 
 class GalleryModuleView(ModuleBaseView):
 
-    gallery = ViewPageTemplateFile('templates/gallery.pt')
+    gallery = ViewPageTemplateFile("templates/gallery.pt")
 
 
 class SearchModuleView(ModuleBaseView):
 
-    search = ViewPageTemplateFile('templates/search.pt')
+    search = ViewPageTemplateFile("templates/search.pt")
 
     def search_widgets(self):
         view = api.content.get_view(
-            name='facetednavigation_view',
+            name="facetednavigation_view",
             context=self.context,
             request=self.request,
         )
@@ -191,30 +196,30 @@ class SearchModuleView(ModuleBaseView):
 
 class FilterModuleView(ModuleBaseView):
 
-    filter = ViewPageTemplateFile('templates/filter.pt')
+    filter = ViewPageTemplateFile("templates/filter.pt")
 
     def results(self):
         query = {
-            'portal_type': self.context.portaltype,
-            'sort_on': 'getObjPositionInParent',
+            "portal_type": self.context.portaltype,
+            "sort_on": "getObjPositionInParent",
         }
         if self.context.searchpath_uuid:
             container = api.content.get(UID=self.context.searchpath_uuid)
             if container:
-                query['path'] = {'query': '/'.join(container.getPhysicalPath())}
-        portal_catalog = api.portal.get_tool('portal_catalog')
-        image_helper = api.content.get_view('image_helper', self.context, self.request)
+                query["path"] = {"query": "/".join(container.getPhysicalPath())}
+        portal_catalog = api.portal.get_tool("portal_catalog")
+        image_helper = api.content.get_view("image_helper", self.context, self.request)
         index = portal_catalog._catalog.getIndex(self.context.index)
         results_list = []
         for brain in portal_catalog(**query):
             obj = brain.getObject()
             results_list.append(
                 {
-                    'title': brain.Title,
-                    'uid': brain.UID,
-                    'url': brain.getURL(),
-                    'image_url': image_helper.image_url(obj),
-                    'css_classes': ' '.join(
+                    "title": brain.Title,
+                    "uid": brain.UID,
+                    "url": brain.getURL(),
+                    "image_url": image_helper.image_url(obj),
+                    "css_classes": " ".join(
                         index.getEntryForObject(brain.getRID(), default=[])
                     ),
                 }
@@ -222,11 +227,11 @@ class FilterModuleView(ModuleBaseView):
         return results_list
 
     def filter_options(self):
-        portal_catalog = api.portal.get_tool('portal_catalog')
+        portal_catalog = api.portal.get_tool("portal_catalog")
         index = self.context.index
         values = portal_catalog.uniqueValuesFor(index)
         if not self.context.vocabulary:
-            return [{'value': i, 'label': i} for i in values]
+            return [{"value": i, "label": i} for i in values]
 
         vocabulary = queryUtility(IVocabularyFactory, self.context.vocabulary, None)
         results = []
@@ -234,17 +239,17 @@ class FilterModuleView(ModuleBaseView):
             for term in vocabulary(self.context):
                 value = term.value
                 label = term.title or term.token or term.value
-                results.append({'value': value, 'label': label})
+                results.append({"value": value, "label": label})
         return results
 
     def module_image_url(self):
-        if getattr(self.context.aq_base, 'image', None):
-            return f'{self.context.absolute_url()}/@@images/image/preview'
+        if getattr(self.context.aq_base, "image", None):
+            return f"{self.context.absolute_url()}/@@images/image/preview"
 
 
 class MediathekModuleView(ModuleBaseView):
 
-    mediathek = ViewPageTemplateFile('templates/mediathek.pt')
+    mediathek = ViewPageTemplateFile("templates/mediathek.pt")
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)

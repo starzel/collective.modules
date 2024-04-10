@@ -34,10 +34,10 @@ def link_url(url, context, request=None):
             url = f"{url}{fragment}"
         return url
 
-    if url.startswith('.'):
-        context_state = api.content.get_view('@@plone_context_state', context)
-        url = '/'.join([context_state.canonical_object_url(), url])
+    if url.startswith("."):
+        context_state = api.content.get_view("@@plone_context_state", context)
+        url = "/".join([context_state.canonical_object_url(), url])
     else:
-        if not url.startswith(('http://', 'https://')):
-            url = request['SERVER_URL'] + url
+        if not url.startswith(("http://", "https://")):
+            url = request["SERVER_URL"] + url
     return url

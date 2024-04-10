@@ -24,10 +24,10 @@ log = getLogger(__name__)
 
 text_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='text', title='Three columns'),
+        SimpleTerm(value="text", title="Three columns"),
         SimpleTerm(
-            value='text_expandable',
-            title='One 2/3 column, one 1/3 column and a expandable block below'
+            value="text_expandable",
+            title="One 2/3 column, one 1/3 column and a expandable block below",
         ),
     ]
 )
@@ -41,31 +41,32 @@ class ITextModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     display_title = schema.Bool(
-        title='Display title?',
+        title="Display title?",
         default=True,
         required=False,
     )
 
     text1 = RichText(
-        title='Text Block 1',
+        title="Text Block 1",
         required=False,
     )
 
     text2 = RichText(
-        title='Text Block 2',
+        title="Text Block 2",
         required=False,
     )
 
     text3 = RichText(
-        title='Text Block 3',
+        title="Text Block 3",
         required=False,
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=text_templates,
-        default='text',)
+        default="text",
+    )
 
 
 @implementer(ITextModule)
@@ -75,9 +76,9 @@ class TextModule(Item):
 
 simple_text_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='blue', title='Blue background, white text'),
-        SimpleTerm(value='white', title='White background, black/blue Text'),
-        SimpleTerm(value='gray', title='Gray background, black/blue Text'),
+        SimpleTerm(value="blue", title="Blue background, white text"),
+        SimpleTerm(value="white", title="White background, black/blue Text"),
+        SimpleTerm(value="gray", title="Gray background, black/blue Text"),
     ]
 )
 
@@ -86,21 +87,21 @@ class ISimpleTextModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     text = RichText(
-        title='Text',
+        title="Text",
         required=False,
     )
 
     image = NamedBlobImage(
-        title='Image',
+        title="Image",
         required=False,
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=simple_text_templates,
         required=False,
-        default='blue',
+        default="blue",
     )
 
 
@@ -111,14 +112,20 @@ class SimpleTextModule(Item):
 
 relationmodule_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='default',
-                   title=_('3 columns, no image, all items displayed')),
-        SimpleTerm(value='events',
-                   title=_('2 items per row with image (events and media)')),
-        SimpleTerm(value='two_item_row_without_images',
-                   title=_('2 items per row without image (press releases )')),
-        SimpleTerm(value='three_item_row',
-                   title=_('3 items per row with images above each item (apropos)')),
+        SimpleTerm(
+            value="default", title=_("3 columns, no image, all items displayed")
+        ),
+        SimpleTerm(
+            value="events", title=_("2 items per row with image (events and media)")
+        ),
+        SimpleTerm(
+            value="two_item_row_without_images",
+            title=_("2 items per row without image (press releases )"),
+        ),
+        SimpleTerm(
+            value="three_item_row",
+            title=_("3 items per row with images above each item (apropos)"),
+        ),
     ]
 )
 
@@ -127,56 +134,56 @@ class IRelationModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     display_title = schema.Bool(
-        title='Display title?',
+        title="Display title?",
         default=True,
         required=False,
     )
 
     text = RichText(
-        title='Text',
+        title="Text",
         required=False,
     )
 
     link_button_text = schema.TextLine(
-        title='Text of Link-Button',
-        default='Show all',
+        title="Text of Link-Button",
+        default="Show all",
         required=False,
     )
 
     directives.widget(link=LinkFieldWidget)
     link = schema.TextLine(
-        title='Link target',
+        title="Link target",
         required=False,
     )
 
     link_text = schema.TextLine(
-        title='Text for the link to each item',
-        default='Read more',
+        title="Text for the link to each item",
+        default="Read more",
         required=False,
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=relationmodule_templates,
         required=False,
-        default='default',
+        default="default",
     )
 
     relations = RelationList(
-        title='Anzuzeigende Inhalte',
+        title="Anzuzeigende Inhalte",
         description='Diese Inhalte werden vor den Ergebnissen des Feldes "Suchbegriffe" angezeigt.',
         default=[],
-        value_type=RelationChoice(vocabulary='plone.app.multilingual.RootCatalog'),
+        value_type=RelationChoice(vocabulary="plone.app.multilingual.RootCatalog"),
         required=False,
         missing_value=[],
     )
     directives.widget(
-        'relations',
+        "relations",
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.multilingual.RootCatalog',
+        vocabulary="plone.app.multilingual.RootCatalog",
         pattern_options={
-            'basePath': make_relation_root_path,
+            "basePath": make_relation_root_path,
         },
     )
 
@@ -187,19 +194,21 @@ class RelationModule(Item):
 
     def items(self):
         # A list of items to display.
-        results = [i.to_object for i in api.relation.get(source=self, relationship='relations')]
+        results = [
+            i.to_object for i in api.relation.get(source=self, relationship="relations")
+        ]
         collection = ICollection(self)
         if collection.query:
             collection_results = [i.getObject() for i in collection.results()]
             results += [i for i in collection_results if i not in results]
         if collection.limit and len(results) > collection.limit:
-            results = results[:collection.limit]
+            results = results[: collection.limit]
         return results
 
 
 gallerymodule_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='gallery', title='Default Gallery'),
+        SimpleTerm(value="gallery", title="Default Gallery"),
     ]
 )
 
@@ -208,38 +217,38 @@ class IGalleryModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     text = RichText(
-        title='Text',
+        title="Text",
         required=False,
     )
 
     show_contained_images = schema.Bool(
-        title='Show images that are inside this folder',
+        title="Show images that are inside this folder",
         required=False,
         default=True,
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=gallerymodule_templates,
         required=False,
-        default='gallery',
+        default="gallery",
     )
 
     relations = RelationList(
-        title='Anzuzeigende Bilder',
+        title="Anzuzeigende Bilder",
         description='Diese Inhalte werden vor den Ergebnissen des Feldes "Suchbegriffe" angezeigt.',
         default=[],
-        value_type=RelationChoice(vocabulary='plone.app.multilingual.RootCatalog'),
+        value_type=RelationChoice(vocabulary="plone.app.multilingual.RootCatalog"),
         required=False,
         missing_value=[],
     )
     directives.widget(
-        'relations',
+        "relations",
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.multilingual.RootCatalog',
+        vocabulary="plone.app.multilingual.RootCatalog",
         pattern_options={
-            'selectableTypes': ['Image'],
+            "selectableTypes": ["Image"],
             # 'basePath': make_relation_root_path,
         },
     )
@@ -253,9 +262,11 @@ class GalleryModule(Container):
         # A list of images to display.
         results = []
         if self.show_contained_images:
-            results += self.contentValues(filter={'portal_type': 'Image'})
+            results += self.contentValues(filter={"portal_type": "Image"})
 
-        results += [i.to_object for i in api.relation.get(source=self, relationship='relations')]
+        results += [
+            i.to_object for i in api.relation.get(source=self, relationship="relations")
+        ]
         collection = ICollection(self)
         if collection.query:
             collection_results = [i.getObject() for i in collection.results()]
@@ -265,7 +276,7 @@ class GalleryModule(Container):
 
 searchmodule_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='search', title='Facetted Navigation'),
+        SimpleTerm(value="search", title="Facetted Navigation"),
     ]
 )
 
@@ -274,27 +285,27 @@ class ISearchModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     display_title = schema.Bool(
-        title='Display title?',
+        title="Display title?",
         default=True,
         required=False,
     )
 
     navigation_title = schema.TextLine(
-        title='Title in Navigation',
+        title="Title in Navigation",
         required=False,
     )
 
     text = RichText(
-        title='Text',
+        title="Text",
         required=False,
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=searchmodule_templates,
         required=False,
-        default='search',
+        default="search",
     )
 
 
@@ -305,7 +316,7 @@ class SearchModule(Container):
 
 filter_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='filter', title='Radiobuttons'),
+        SimpleTerm(value="filter", title="Radiobuttons"),
     ]
 )
 
@@ -314,80 +325,80 @@ class IFilterModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     display_title = schema.Bool(
-        title='Display title?',
+        title="Display title?",
         default=True,
         required=False,
     )
 
     navigation_title = schema.TextLine(
-        title='Title in Navigation',
+        title="Title in Navigation",
         required=False,
     )
 
     text = RichText(
-        title='Text',
+        title="Text",
         required=False,
     )
 
     expand_button_text = schema.TextLine(
-        title='Text of expand-Button',
-        default='Show all',
+        title="Text of expand-Button",
+        default="Show all",
         required=False,
     )
 
     link_text = schema.TextLine(
-        title='Text for link',
-        default='Read more',
+        title="Text for link",
+        default="Read more",
         required=False,
     )
 
     image = NamedBlobImage(
-        title='Image',
+        title="Image",
         required=False,
     )
 
     background_color = schema.Choice(
-        title='Hintergrundfarbe',
+        title="Hintergrundfarbe",
         required=True,
-        values=['gray', 'blue'],
-        default='gray',
+        values=["gray", "blue"],
+        default="gray",
     )
 
     portaltype = schema.Choice(
-        title='Inhaltstyp',
+        title="Inhaltstyp",
         required=True,
-        default='Document',
-        vocabulary='plone.app.vocabularies.UserFriendlyTypes',
+        default="Document",
+        vocabulary="plone.app.vocabularies.UserFriendlyTypes",
     )
 
     searchpath_uuid = schema.Choice(
-        title='Pfad zum Einschränken der Inhalte',
-        vocabulary='plone.app.multilingual.RootCatalog',
+        title="Pfad zum Einschränken der Inhalte",
+        vocabulary="plone.app.multilingual.RootCatalog",
         required=False,
     )
     directives.widget(
-        'searchpath_uuid',
+        "searchpath_uuid",
         RelatedItemsFieldWidget,
     )
 
     index = schema.Choice(
-        title='Index zum Filtern',
+        title="Index zum Filtern",
         required=True,
-        vocabulary='eea.faceted.vocabularies.CatalogIndexes',
+        vocabulary="eea.faceted.vocabularies.CatalogIndexes",
     )
 
     vocabulary = schema.Choice(
-        title='Werte aus Vocabulary',
+        title="Werte aus Vocabulary",
         required=True,
-        vocabulary='eea.faceted.vocabularies.PortalVocabularies',
+        vocabulary="eea.faceted.vocabularies.PortalVocabularies",
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=filter_templates,
         required=False,
-        default='filter',
+        default="filter",
     )
 
 
@@ -398,8 +409,8 @@ class FilterModule(Container):
 
 video_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='video', title='Show all Videos'),
-        SimpleTerm(value='video_one', title='Only one Video'),
+        SimpleTerm(value="video", title="Show all Videos"),
+        SimpleTerm(value="video_one", title="Only one Video"),
     ]
 )
 
@@ -408,39 +419,39 @@ class IVideoModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     display_title = schema.Bool(
-        title='Display title?',
+        title="Display title?",
         default=True,
         required=False,
     )
 
     navigation_title = schema.TextLine(
-        title='Title in Navigation',
+        title="Title in Navigation",
         required=False,
     )
 
     relations = RelationList(
-        title='Anzuzeigende Videos',
+        title="Anzuzeigende Videos",
         description='Diese Inhalte werden vor den Ergebnissen des Feldes "Suchbegriffe" angezeigt.',
         default=[],
-        value_type=RelationChoice(vocabulary='plone.app.multilingual.RootCatalog'),
+        value_type=RelationChoice(vocabulary="plone.app.multilingual.RootCatalog"),
         required=False,
         missing_value=[],
     )
     directives.widget(
-        'relations',
+        "relations",
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.multilingual.RootCatalog',
+        vocabulary="plone.app.multilingual.RootCatalog",
         pattern_options={
-            'basePath': make_relation_root_path,
+            "basePath": make_relation_root_path,
         },
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=video_templates,
         required=False,
-        default='video',
+        default="video",
     )
 
 
@@ -450,7 +461,9 @@ class VideoModule(Item):
 
     def items(self):
         # A list of items to display.
-        results = [i.to_object for i in api.relation.get(source=self, relationship='relations')]
+        results = [
+            i.to_object for i in api.relation.get(source=self, relationship="relations")
+        ]
         collection = ICollection(self)
         if collection.query:
             collection_results = [i.getObject() for i in collection.results()]
@@ -461,7 +474,7 @@ class VideoModule(Item):
 text_with_images_templates = SimpleVocabulary(
     [
         SimpleTerm(
-            value='text_with_images', title='Three columns with text and images'
+            value="text_with_images", title="Three columns with text and images"
         ),
     ]
 )
@@ -471,121 +484,121 @@ class ITextWithImagesModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     fieldset(
-        'block1',
-        label='Block 1',
-        fields=['title1', 'text1', 'image1', 'link1', 'link_text1'],
+        "block1",
+        label="Block 1",
+        fields=["title1", "text1", "image1", "link1", "link_text1"],
     )
 
     fieldset(
-        'block2',
-        label='Block 2',
-        fields=['title2', 'text2', 'image2', 'link2', 'link_text2'],
+        "block2",
+        label="Block 2",
+        fields=["title2", "text2", "image2", "link2", "link_text2"],
     )
 
     fieldset(
-        'block3',
-        label='Block 3',
-        fields=['title3', 'text3', 'image3', 'link3', 'link_text3'],
+        "block3",
+        label="Block 3",
+        fields=["title3", "text3", "image3", "link3", "link_text3"],
     )
 
     display_title = schema.Bool(
-        title='Display title?',
+        title="Display title?",
         default=True,
         required=False,
     )
 
     navigation_title = schema.TextLine(
-        title='Title in Navigation',
+        title="Title in Navigation",
         required=False,
     )
 
     image1 = NamedBlobImage(
-        title='Image 1',
+        title="Image 1",
         required=False,
     )
 
     title1 = schema.TextLine(
-        title='Heading Block 1',
+        title="Heading Block 1",
         required=False,
     )
 
     text1 = schema.Text(
-        title='Text Block 1',
+        title="Text Block 1",
         required=False,
     )
 
     directives.widget(link1=LinkFieldWidget)
     link1 = schema.TextLine(
-        title='Link target for block 1',
+        title="Link target for block 1",
         required=False,
     )
 
     link_text1 = schema.TextLine(
-        title='Text for link in block 1',
-        default='Read more',
+        title="Text for link in block 1",
+        default="Read more",
         required=False,
     )
 
     image2 = NamedBlobImage(
-        title='Image 2',
+        title="Image 2",
         required=False,
     )
 
     title2 = schema.TextLine(
-        title='Heading Block 2',
+        title="Heading Block 2",
         required=False,
     )
 
     text2 = schema.Text(
-        title='Text Block 2',
+        title="Text Block 2",
         required=False,
     )
 
     directives.widget(link2=LinkFieldWidget)
     link2 = schema.TextLine(
-        title='Link target for block 2',
+        title="Link target for block 2",
         required=False,
     )
 
     link_text2 = schema.TextLine(
-        title='Text for link in block 2',
-        default='Read more',
+        title="Text for link in block 2",
+        default="Read more",
         required=False,
     )
 
     image3 = NamedBlobImage(
-        title='Image 3',
+        title="Image 3",
         required=False,
     )
 
     title3 = schema.TextLine(
-        title='Heading Block 3',
+        title="Heading Block 3",
         required=False,
     )
 
     text3 = schema.Text(
-        title='Text Block 3',
+        title="Text Block 3",
         required=False,
     )
 
     directives.widget(link3=LinkFieldWidget)
     link3 = schema.TextLine(
-        title='Link target for block 3',
+        title="Link target for block 3",
         required=False,
     )
 
     link_text3 = schema.TextLine(
-        title='Text for link in block 3',
-        default='Read more',
+        title="Text for link in block 3",
+        default="Read more",
         required=False,
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=text_with_images_templates,
         required=True,
-        default='text_with_images',
+        default="text_with_images",
     )
 
 
@@ -596,8 +609,10 @@ class TextWithImagesModule(Item):
 
 banner_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='gray', title='Gray background, black/blue Text'),
-        SimpleTerm(value='leibniz', title='2/3 Image, 1/3 Text with light blue background'),
+        SimpleTerm(value="gray", title="Gray background, black/blue Text"),
+        SimpleTerm(
+            value="leibniz", title="2/3 Image, 1/3 Text with light blue background"
+        ),
     ]
 )
 
@@ -606,42 +621,42 @@ class IBannerModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     display_title = schema.Bool(
-        title='Display title?',
+        title="Display title?",
         default=True,
         required=False,
     )
 
     image = NamedBlobImage(
-        title='Image',
+        title="Image",
         required=False,
     )
 
     # Hidden as requested: https://support.starzel.de/issues/11761
     # Some objects still have content
-    directives.mode(text='hidden')
+    directives.mode(text="hidden")
     text = RichText(
-        title='Text Block',
+        title="Text Block",
         required=False,
     )
 
     directives.widget(link=LinkFieldWidget)
     link = schema.TextLine(
-        title='Link target',
+        title="Link target",
         required=False,
     )
 
     link_text = schema.TextLine(
-        title='Text for link',
-        default='Read more',
+        title="Text for link",
+        default="Read more",
         required=False,
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=banner_templates,
         required=True,
-        default='gray',
+        default="gray",
     )
 
 
@@ -652,7 +667,7 @@ class BannerModule(Item):
 
 mediathek_templates = SimpleVocabulary(
     [
-        SimpleTerm(value='mediathek', title='Default Mediathek'),
+        SimpleTerm(value="mediathek", title="Default Mediathek"),
     ]
 )
 
@@ -661,115 +676,116 @@ class IMediathekModule(IModuleBase):
     """Dexterity-Schema for Module"""
 
     display_title = schema.Bool(
-        title='Display title?',
+        title="Display title?",
         default=True,
         required=False,
     )
 
     relations = RelationList(
-        title='Anzuzeigende Inhalte',
+        title="Anzuzeigende Inhalte",
         description='Diese Inhalte werden vor den Ergebnissen des Feldes "Suchbegriffe" angezeigt.',
         default=[],
-        value_type=RelationChoice(vocabulary='plone.app.multilingual.RootCatalog'),
+        value_type=RelationChoice(vocabulary="plone.app.multilingual.RootCatalog"),
         required=False,
         missing_value=[],
     )
     directives.widget(
-        'relations',
+        "relations",
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.multilingual.RootCatalog',
+        vocabulary="plone.app.multilingual.RootCatalog",
         pattern_options={
-            'basePath': make_relation_root_path,
+            "basePath": make_relation_root_path,
         },
     )
 
     directives.widget(template_variant=RadioFieldWidget)
     template_variant = schema.Choice(
-        title='Variation',
+        title="Variation",
         vocabulary=mediathek_templates,
         required=False,
-        default='mediathek',
+        default="mediathek",
     )
 
     directives.widget(link=LinkFieldWidget)
     link = schema.TextLine(
-        title='Link target',
+        title="Link target",
         required=False,
     )
 
     link_text = schema.TextLine(
-        title='Text for link',
-        default='Read more',
+        title="Text for link",
+        default="Read more",
         required=False,
     )
 
     link1_button_text = schema.TextLine(
-        title='Text of first Link-Button',
-        default='More information',
+        title="Text of first Link-Button",
+        default="More information",
         required=False,
     )
 
     link1_categorie = schema.TextLine(
-        title='Text for the first link categorie',
-        default='Podcast',
+        title="Text for the first link categorie",
+        default="Podcast",
         required=False,
     )
 
     link1_image = NamedBlobImage(
-        title='First link image',
+        title="First link image",
         required=False,
     )
 
     link2_button_text = schema.TextLine(
-        title='Text of second Link-Button',
-        default='More information',
+        title="Text of second Link-Button",
+        default="More information",
         required=False,
     )
 
     link2_categorie = schema.TextLine(
-        title='Text for the second link categorie',
-        default='Podcast',
+        title="Text for the second link categorie",
+        default="Podcast",
         required=False,
     )
 
     link2_image = NamedBlobImage(
-        title='Second link image',
+        title="Second link image",
         required=False,
     )
 
     link3_button_text = schema.TextLine(
-        title='Text of third Link-Button',
-        default='More information',
+        title="Text of third Link-Button",
+        default="More information",
         required=False,
     )
 
     link3_categorie = schema.TextLine(
-        title='Text for the third link to each item',
-        default='Podcast',
+        title="Text for the third link to each item",
+        default="Podcast",
         required=False,
     )
 
     link3_image = NamedBlobImage(
-        title='Third link image',
+        title="Third link image",
         required=False,
     )
 
     link4_button_text = schema.TextLine(
-        title='Text of fourth Link-Button',
-        default='More information',
+        title="Text of fourth Link-Button",
+        default="More information",
         required=False,
     )
 
-    link4_categorie= schema.TextLine(
-        title='Text for the fourth link categorie',
-        default='More information',
+    link4_categorie = schema.TextLine(
+        title="Text for the fourth link categorie",
+        default="More information",
         required=False,
     )
 
     link4_image = NamedBlobImage(
-        title='Fourth link image',
+        title="Fourth link image",
         required=False,
     )
+
 
 @implementer(IMediathekModule)
 class MediathekModule(Item):
@@ -777,5 +793,5 @@ class MediathekModule(Item):
 
     def items(self):
         # A list of items to display.
-        results = api.relation.get(source=self, relationship='relations')
+        results = api.relation.get(source=self, relationship="relations")
         return [i.to_object for i in results]
