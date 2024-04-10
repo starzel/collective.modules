@@ -4,7 +4,8 @@
                 video_infos python: view.video_infos()">
 
     <div class="dynajet-wrapper module module-video"
-         tal:attributes="id python: 'module_' + context.getId()">
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'dynajet-wrapper module module-video ' + view.module_class();">
         <div class="row">
             <div class="col-12 mb-3" tal:condition="python: context.display_title and context.title">
                 <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>

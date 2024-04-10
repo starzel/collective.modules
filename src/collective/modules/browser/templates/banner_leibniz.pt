@@ -4,7 +4,8 @@
                 link_url python:view.link_url(context.link);">
 
     <section class="teaser-flow stack-ml teaser-flow-posts push-ml module banner_leibniz"
-         tal:attributes="id python: 'module_' + context.getId()">
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module banner_leibniz ' + view.module_class();">
 
         <div class="advert-custom bg-dipf-blue stop">
             <a tal:attributes="href python: link_url" class="link-outer flow-m">

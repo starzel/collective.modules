@@ -4,7 +4,8 @@
 
     <div class="col-sm-12 col-md-6 col-xl-4">
         <div class="dynajet-box bg-blue"
-             tal:attributes="class python: 'dynajet-box bg-{}'.format(context.template_variant)">
+             tal:attributes="id python: 'module_' + context.getId();
+                             class python: 'dynajet-box bg-{}'.format(context.template_variant);">
             <div class="dynajet-image"
                  tal:define="image_url python: view.image_url()"
                  tal:condition="image_url">

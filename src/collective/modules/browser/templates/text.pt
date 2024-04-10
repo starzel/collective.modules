@@ -9,7 +9,8 @@
   col_md python: 6 if count > 1 else 12;">
 
   <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
-     tal:attributes="id python: 'module_' + context.getId()">
+     tal:attributes="id python: 'module_' + context.getId();
+                     class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module ' + view.module_class();">
     <div class="row">
       <div
         class="col-12 mb-3" tal:condition="python: context.display_title and context.title">

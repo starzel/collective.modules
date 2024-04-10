@@ -4,6 +4,7 @@ from plone import api
 from plone.app.event.base import dates_for_display
 from plone.app.textfield.value import RichTextValue
 from plone.dexterity.browser.view import DefaultView
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import BoundPageTemplate
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -79,6 +80,15 @@ class ModuleBaseView(DefaultView):
         else:
             self.template()
 
+    def module_class(self):
+        classes = []
+        normalizer = queryUtility(IIDNormalizer)
+        classes.append(f"moduletype-{normalizer.normalize(self.context.portal_type)}")
+        variant = getattr(self.context, "template_variant", None)
+        if variant:
+            classes.append(f"modulevariant-{normalizer.normalize(variant)}")
+        return " ".join(classes)
+
 
 class VideoModuleView(ModuleBaseView):
 
@@ -151,7 +161,9 @@ class RelationModuleView(ModuleBaseView):
         "templates/relation_two_item_row_without_images.pt"
     )
     three_item_row = ViewPageTemplateFile("templates/relation_three_item_row.pt")
-    three_item_row_portrait = ViewPageTemplateFile("templates/relation_three_item_row_portrait.pt")
+    three_item_row_portrait = ViewPageTemplateFile(
+        "templates/relation_three_item_row_portrait.pt"
+    )
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)

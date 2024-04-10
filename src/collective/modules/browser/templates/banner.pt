@@ -4,7 +4,8 @@
                 link_url python:view.link_url(context.link);">
 
     <section class="teaser-flow stack-ml teaser-flow-posts push-ml module banner"
-         tal:attributes="id python: 'module_' + context.getId()">
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module banner ' + view.module_class();">
 
         <div tal:condition="python: context.title or context.description">
             <h3 class="module__title strong sans-h6 a-center"

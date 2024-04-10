@@ -5,7 +5,8 @@
 
     <div class="dynajet-wrapper module"
          tal:define="images python:context.images()"
-         tal:attributes="id python: 'module_' + context.getId()">
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'dynajet-wrapper module ' + view.module_class();">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-lg-4 mb-5 text-container">
                 <h2 tal:content="python: context.title">Title</h2>

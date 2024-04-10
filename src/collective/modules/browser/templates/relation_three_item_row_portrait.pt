@@ -8,7 +8,8 @@
                 link_url python:view.link_url(context.link);">
 
     <section class="teaser-flow stack-ml teaser-flow-posts push-ml module three-item-row-portrait"
-         tal:attributes="id python: 'module_' + context.getId()">
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module three-item-row-portrait ' + view.module_class();">
 
         <div tal:condition="python: context.title or context.description">
             <h3 class="strong sans-h6 a-center"

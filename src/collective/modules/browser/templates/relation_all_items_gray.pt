@@ -6,7 +6,8 @@
                 image_helper nocall: context/@@image_helper;">
 
     <div class="dynajet-wrapper module mb"
-         tal:attributes="id python: 'module_' + context.getId()">
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'dynajet-wrapper module mb ' + view.module_class();">
         <div class="row">
             <div class="col-12 mb-3" tal:condition="python: context.title and context.title != 'None' or context.description">
                 <h2 class="module__title" tal:condition="python: context.title" tal:content="python: context.title">Title</h2>

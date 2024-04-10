@@ -8,7 +8,8 @@
                 link_url python:view.link_url(context.link);">
 
     <section class="teaser-flow stack-ml teaser-flow-posts push-ml module three-item-row"
-         tal:attributes="id python: 'module_' + context.getId()">
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module ' + view.module_class();">
 
         <div tal:condition="python: context.title or context.description">
             <h3 class="strong sans-h6 a-center"
@@ -34,12 +35,13 @@
                 <li class="teaser-item teaser-item-post">
 
                     <div class="mb-4"
-                         tal:define="images nocall:item/@@images;
-                                     tag python: images.tag(fieldname='image', height=350, alt=item.title);"
-                         tal:condition="python: tag">
+                         tal:define="image_url python: image_helper.image_url(item);"
+                         tal:condition="python: image_url">
                       <a tal:attributes="href python: item.absolute_url();
                                          title python: item.title;">
-                        <img tal:replace="structure python: tag" />
+                        <img class=""
+                             tal:attributes="src python: image_url;
+                                             alt python: item.title;" />
                       </a>
                     </div>
 

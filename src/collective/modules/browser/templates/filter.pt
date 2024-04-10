@@ -6,7 +6,8 @@
 
     <div class="dynajet-wrapper module mb-full filter"
          tal:define="form_name python: 'radio_' + uuid"
-         tal:attributes="id python: 'module_' + context.getId()">
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'dynajet-wrapper module mb-full filter ' + view.module_class();">
         <div tal:attributes="id python: form_name">
             <div class="row">
             <div class="col-12 mb-3" tal:condition="python: context.display_title and context.title">
