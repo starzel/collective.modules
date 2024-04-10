@@ -7,7 +7,7 @@
                 plone_view nocall: context/@@plone;
                 link_url python:view.link_url(context.link);">
 
-    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module three-item-row"
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module three-item-row-portrait"
          tal:attributes="id python: 'module_' + context.getId()">
 
         <div tal:condition="python: context.title or context.description">
@@ -35,7 +35,7 @@
 
                     <div class="mb-4"
                          tal:define="images nocall:item/@@images;
-                                     tag python: images.tag(fieldname='image', height=350, alt=item.title);"
+                                     tag python: images.tag(fieldname='image', width=261, height=348, alt=item.title);"
                          tal:condition="python: tag">
                       <a tal:attributes="href python: item.absolute_url();
                                          title python: item.title;">
