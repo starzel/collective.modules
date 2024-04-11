@@ -27,7 +27,7 @@
                              tal:attributes="class python: 'carousel-item active' if repeat['image'].start else 'carousel-item'">
                             <div class="carousel-image">
                                 <img class="d-block wh-100"
-                                     tal:attributes="src python:image.absolute_url() + '/@@images/image/preview';">
+                                     tal:attributes="src python:image.absolute_url() + '/@@images/image/large';">
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                            tal:attributes="data-bs-target python: '#carousel_' + context.id;
                                            data-bs-id repeat/image/index;">
                             <img src=""
-                                 tal:attributes="src python:image.absolute_url() + '/@@images/image/preview';" />
+                                 tal:attributes="src python:image.absolute_url() + '/@@images/image/mini';" />
                         </a>
                     </li>
                 </ol>
