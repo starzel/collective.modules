@@ -122,6 +122,7 @@ class TextModuleView(ModuleBaseView):
 
     text = ViewPageTemplateFile("templates/text.pt")
     text_expandable = ViewPageTemplateFile("templates/text_expandable.pt")
+    text_one_column = ViewPageTemplateFile("templates/text_one_column.pt")
 
 
 class TextWithImagesModuleView(ModuleBaseView):

@@ -1,0 +1,39 @@
+<metal:module-core define-macro="module_core"
+    i18n:domain="collective.modules"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
+
+    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module ' + view.module_class();">
+        <div class="row">
+            <div class="col-md-1 d-none d-md-block"></div>
+            <div class="col-md-11 col-sm-12 mb-3" tal:condition="python: context.display_title and context.title">
+                <h3 class="module__title strong sans-h6 a-center" tal:condition="python: context.title" tal:content="python: context.title">Title</h3>
+                <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1 d-none d-md-block"></div>
+
+            <div class="col-sm-12 col-md-10 mb-4 text-container sans-t2 plain-txt"
+                 tal:condition="python: context.text1">
+                <div tal:replace="structure python:context.text1.output">
+                    Text 1
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
+                <a class="btn btn-primary btn-sm  float-right"
+                   tal:condition="python: checkPermission('Modify portal content', context)"
+                   tal:attributes="href python: context.absolute_url() + '/edit'">
+                    Edit Module
+                </a>
+            </div>
+        </div>
+    </section>
+
+</metal:module-core>

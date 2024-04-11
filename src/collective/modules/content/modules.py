@@ -29,6 +29,10 @@ text_templates = SimpleVocabulary(
             value="text_expandable",
             title="One 2/3 column, one 1/3 column and a expandable block below",
         ),
+        SimpleTerm(
+            value="text_one_column",
+            title="One column (the other two text-blocks are ignored)",
+        ),
     ]
 )
 
