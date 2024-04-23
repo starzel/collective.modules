@@ -6,17 +6,16 @@
          tal:attributes="id python: 'module_' + context.getId();
                          class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module ' + view.module_class();">
         <div class="row">
-            <div class="col-md-1 d-none d-md-block"></div>
-            <div class="col-md-11 col-sm-12 mb-3" tal:condition="python: context.display_title and context.title">
+            <div class="col-md-2 d-none d-md-block"></div>
+            <div class="col-md-8 col-sm-12 mb-3" tal:condition="python: context.display_title and context.title">
                 <h3 class="module__title strong sans-h6 a-center" tal:condition="python: context.title" tal:content="python: context.title">Title</h3>
                 <p class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">Description</p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-1 d-none d-md-block"></div>
-
-            <div class="col-sm-12 col-md-10 mb-4 text-container sans-t2 plain-txt"
+            <div class="col-md-2 d-none d-md-block"></div>
+            <div class="col-md-8 col-sm-12 mb-4 text-container sans-t2 plain-txt"
                  tal:condition="python: context.text1">
                 <div tal:replace="structure python:context.text1.output">
                     Text 1
