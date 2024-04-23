@@ -35,7 +35,7 @@
                 <li class="teaser-item teaser-item-post">
 
                     <div class="mb-4"
-                         tal:define="image_url python: image_helper.image_url(item);"
+                         tal:define="image_url python: image_helper.image_url(item, scale='large');"
                          tal:condition="python: image_url">
                       <a tal:attributes="href python: item.absolute_url();
                                          title python: item.title;">
