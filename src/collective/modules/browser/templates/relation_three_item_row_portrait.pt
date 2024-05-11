@@ -36,7 +36,7 @@
 
                     <div class="mb-4"
                          tal:define="images nocall:item/@@images;
-                                     tag python: images.tag(fieldname='image', width=261, height=348, alt=item.title);"
+                                     tag python: images.tag(fieldname='image', width=261, height=348, mode='contain', alt=item.title);"
                          tal:condition="python: tag">
                       <a tal:attributes="href python: item.absolute_url();
                                          title python: item.title;">

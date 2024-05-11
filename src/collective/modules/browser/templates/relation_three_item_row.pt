@@ -35,13 +35,12 @@
                 <li class="teaser-item teaser-item-post">
 
                     <div class="mb-4"
-                         tal:define="image_url python: image_helper.image_url(item);"
-                         tal:condition="python: image_url">
+                         tal:define="images nocall:item/@@images;
+                                     tag python: images.tag(fieldname='image', height=350, alt=item.title);"
+                         tal:condition="python: tag">
                       <a tal:attributes="href python: item.absolute_url();
                                          title python: item.title;">
-                        <img class=""
-                             tal:attributes="src python: image_url;
-                                             alt python: item.title;" />
+                        <img tal:replace="structure python: tag" />
                       </a>
                     </div>
 
