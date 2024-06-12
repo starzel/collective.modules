@@ -39,7 +39,7 @@
                        tal:attributes="href python: item.absolute_url();
                                        title python: item.title;">
 
-                        <div class="item-text">
+                        <div>
                             <div class="item-text-inner stack-xs">
                                 <div class="sans-h2b strong"
                                      tal:define="start python: getattr(item, 'start', False);"

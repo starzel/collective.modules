@@ -43,7 +43,7 @@
                                 <img tal:replace="structure python: tag">
                         </div>
 
-                        <div class="item-text">
+                        <div>
                             <div class="item-text-inner stack-xs">
                                 <tal:date tal:define="start python: getattr(item, 'start', False);
                                                       end python: getattr(item, 'end', False);"
