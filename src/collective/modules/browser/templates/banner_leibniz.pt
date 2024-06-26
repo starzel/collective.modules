@@ -3,9 +3,9 @@
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 link_url python:view.link_url(context.link);">
 
-    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module banner_leibniz"
+    <section class="teaser-flow stack-ml teaser-flow-posts push-l module banner_leibniz"
          tal:attributes="id python: 'module_' + context.getId();
-                         class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module banner_leibniz ' + view.module_class();">
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-l module banner_leibniz ' + view.module_class();">
 
         <div class="advert-custom bg-dipf-blue stop">
             <a tal:attributes="href python: link_url" class="link-outer flow-m">

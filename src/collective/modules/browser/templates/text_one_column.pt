@@ -2,9 +2,9 @@
     i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;">
 
-    <section class="teaser-flow stack-ml teaser-flow-posts push-ml module"
+    <section class="teaser-flow stack-ml teaser-flow-posts push-l module"
          tal:attributes="id python: 'module_' + context.getId();
-                         class python: 'teaser-flow stack-ml teaser-flow-posts push-ml module ' + view.module_class();">
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-l module ' + view.module_class();">
         <div class="row">
             <div class="col-md-2 d-none d-md-block"></div>
             <div class="col-md-8 col-sm-12 mb-3" tal:condition="python: context.display_title and context.title">
