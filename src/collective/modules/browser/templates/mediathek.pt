@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div class="stack-s mb-4"
+    <div class="stack-s mb-4 mt-0"
        tal:condition="python: link_url">
       <div class="a-center">
         <a class="btn-ghost btn"
