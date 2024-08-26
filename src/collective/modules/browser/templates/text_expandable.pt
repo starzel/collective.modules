@@ -46,7 +46,8 @@
                        i18n:translate=""
                        tal:attributes="href python: '#collapse_' + context.id;
                                        aria-controls python: 'collapse_' + context.id">
-                        <span class="text">Text weiterlesen</span>
+                        <span i18n:translate="" class="text">Text weiterlesen</span>
+
                     </a>
                 </p>
             </div>

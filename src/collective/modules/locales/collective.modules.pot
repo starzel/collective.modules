@@ -1,0 +1,86 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2024-08-26 12:45+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.modules\n"
+
+#: collective/modules/content/modules.py
+msgid "2 items per row with image (events and media)"
+msgstr ""
+
+#: collective/modules/content/modules.py
+msgid "2 items per row without image (press releases )"
+msgstr ""
+
+#: collective/modules/content/modules.py
+msgid "3 columns, no image, all items displayed"
+msgstr ""
+
+#: collective/modules/content/modules.py
+msgid "3 items per row with portrait images above each item (apropos)"
+msgstr ""
+
+#: collective/modules/content/modules.py
+msgid "3 items per row with square images above each item (apropos)"
+msgstr ""
+
+#: collective/modules/content/modules.py
+msgid "3 items per row with with 2/1 images and background color (landingpages)"
+msgstr ""
+
+#: collective/modules/browser/templates/text_expandable.pt
+msgid "<span class=\"text\">x</span>"
+msgstr ""
+
+#: collective/modules/behaviors/configure.zcml
+msgid "Add a field to select modules that are within this container."
+msgstr ""
+
+#: collective/modules/browser/templates/filter.pt
+msgid "Alle"
+msgstr ""
+
+#: collective/modules/browser/templates/video.pt
+msgid "Alle Filme"
+msgstr ""
+
+#: collective/modules/configure.zcml
+msgid "Installs the collective.modules add-on."
+msgstr ""
+
+#: collective/modules/behaviors/configure.zcml
+msgid "Modules"
+msgstr ""
+
+#: collective/modules/browser/templates/text_expandable.pt
+msgid "Text weiterlesen"
+msgstr ""
+
+#: collective/modules/browser/templates/filter.pt
+msgid "Thema wählen"
+msgstr ""
+
+#: collective/modules/configure.zcml
+msgid "Uninstalls the collective.modules add-on."
+msgstr ""
+
+#: collective/modules/configure.zcml
+msgid "collective.modules"
+msgstr ""
+
+#: collective/modules/configure.zcml
+msgid "collective.modules (uninstall)"
+msgstr ""
