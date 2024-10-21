@@ -201,4 +201,21 @@
     template="templates/full_module.pt"
     permission="zope2.View"
   />
+
+  <browser:page
+      name="inner_module"
+      for="collective.modules.content.modules.IContainerModule"
+      class=".modules.ContainerModuleView"
+      template="templates/relation.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.IContainerModule"
+      class=".modules.ContainerModuleView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
 </configure>

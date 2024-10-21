@@ -10,6 +10,7 @@
       <element>textmodule</element>
       <element>bannermodule</element>
       <element>mediathekmodule</element>
+      <element>containermodule</element>
     </value>
   </record>
 

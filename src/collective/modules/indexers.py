@@ -26,6 +26,7 @@ def searchable_text_modules(obj):
                 "filtermodule",
                 "bannermodule",
                 "textwithimagesmodule",
+                "containermodule",
             ]
         }
     ):

@@ -7,5 +7,6 @@
  <object meta_type="Dexterity FTI" name="mediathekmodule" />
  <object meta_type="Dexterity FTI" name="gallerymodule" />
  <object meta_type="Dexterity FTI" name="bannermodule" />
+ <object meta_type="Dexterity FTI" name="containermodule" />
 
 </object>

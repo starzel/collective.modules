@@ -809,3 +809,116 @@ class MediathekModule(Item):
         # A list of items to display.
         results = api.relation.get(source=self, relationship="relations")
         return [i.to_object for i in results]
+
+
+contentmodule_templates = SimpleVocabulary(
+    [
+        SimpleTerm(
+            value="default", title=_("3 columns, no image, all items displayed")
+        ),
+        SimpleTerm(
+            value="events", title=_("2 items per row with image (events and media)")
+        ),
+        SimpleTerm(
+            value="two_item_row_without_images",
+            title=_("2 items per row without image (press releases )"),
+        ),
+        SimpleTerm(
+            value="three_item_row",
+            title=_("3 items per row with square images above each item (apropos)"),
+        ),
+        SimpleTerm(
+            value="three_item_row_portrait",
+            title=_("3 items per row with portrait images above each item (apropos)"),
+        ),
+        SimpleTerm(
+            value="three_item_row_landingpages",
+            title=_(
+                "3 items per row with with 2/1 images and background color (landingpages)"
+            ),
+        ),
+    ]
+)
+
+
+class IContainerModule(IModuleBase):
+    """Dexterity-Schema for Module"""
+
+    display_title = schema.Bool(
+        title="Display title?",
+        default=True,
+        required=False,
+    )
+
+    text = RichText(
+        title="Text",
+        required=False,
+    )
+
+    link_button_text = schema.TextLine(
+        title="Text of Link-Button",
+        default="Show all",
+        required=False,
+    )
+
+    directives.widget(link=LinkFieldWidget)
+    link = schema.TextLine(
+        title="Link target",
+        required=False,
+    )
+
+    link_text = schema.TextLine(
+        title="Text for the link to each item",
+        default="Read more",
+        required=False,
+    )
+
+    show_contained_content = schema.Bool(
+        title="Show content that is inside this folder",
+        required=False,
+        default=True,
+    )
+
+    directives.widget(template_variant=RadioFieldWidget)
+    template_variant = schema.Choice(
+        title="Variation",
+        vocabulary=contentmodule_templates,
+        required=False,
+        default="default",
+    )
+
+    relations = RelationList(
+        title="Anzuzeigende Inhalte",
+        description="Diese Inhalte werden vor den Inhalten des Ordners angezeigt.",
+        default=[],
+        value_type=RelationChoice(vocabulary="plone.app.multilingual.RootCatalog"),
+        required=False,
+        missing_value=[],
+    )
+    directives.widget(
+        "relations",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.multilingual.RootCatalog",
+        pattern_options={
+            "basePath": make_relation_root_path,
+        },
+    )
+
+
+@implementer(IContainerModule)
+class ContainerModule(Container):
+    """Container Module instance"""
+
+    def items(self):
+        # A list of items to display.
+        results = [
+            i.to_object for i in api.relation.get(source=self, relationship="relations")
+        ]
+        collection = ICollection(self, None)
+        if collection and collection.query:
+            collection_results = [i.getObject() for i in collection.results()]
+            results += [i for i in collection_results if i not in results]
+            if collection.limit and len(results) > collection.limit:
+                results = results[: collection.limit]
+        results += [i for i in self.contentValues() if i not in results]
+        return results
