@@ -270,3 +270,41 @@ class MediathekModuleView(ModuleBaseView):
 
     def link_url(self, url):
         return link_url(url, self.context, self.request)
+
+
+class ContainerModuleView(ModuleBaseView):
+
+    default = ViewPageTemplateFile("templates/relation.pt")
+    events = ViewPageTemplateFile("templates/relation_events.pt")
+    two_item_row_without_images = ViewPageTemplateFile(
+        "templates/relation_two_item_row_without_images.pt"
+    )
+    three_item_row = ViewPageTemplateFile("templates/relation_three_item_row.pt")
+    three_item_row_portrait = ViewPageTemplateFile(
+        "templates/relation_three_item_row_portrait.pt"
+    )
+    three_item_row_landingpages = ViewPageTemplateFile(
+        "templates/relation_three_item_row_landingpages.pt"
+    )
+
+    def link_url(self, url):
+        return link_url(url, self.context, self.request)
+
+    def dates_for_display(self, event):
+        return dates_for_display(event)
+
+    def description(self, obj):
+        """Get text in case description is empty"""
+        if getattr(obj.aq_base, "description", None):
+            return obj.description
+        if (
+            getattr(obj.aq_base, "text", None)
+            and isinstance(obj.text, RichTextValue)
+            and obj.text.output
+        ):
+            transforms = api.portal.get_tool("portal_transforms")
+            text = transforms.convertTo(
+                "text/plain", obj.text.output, mimetype=obj.text.mimeType
+            ).getData()
+            return text
+        return ""

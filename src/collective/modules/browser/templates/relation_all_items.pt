@@ -63,6 +63,11 @@
                    tal:attributes="href python: context.absolute_url() + '/edit'">
                     Edit Module
                 </a>
+                <a class="btn btn-primary btn-sm float-right"
+                    tal:condition="python: context.isPrincipiaFolderish and checkPermission('Modify portal content', context)"
+                    tal:attributes="href python: context.absolute_url() + '/folder_contents'">
+                    Manage Content
+                </a>
             </div>
         </div>
     </div>
