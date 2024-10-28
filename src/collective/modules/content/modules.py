@@ -887,23 +887,6 @@ class IContainerModule(IModuleBase):
         default="default",
     )
 
-    relations = RelationList(
-        title="Anzuzeigende Inhalte",
-        description="Diese Inhalte werden vor den Inhalten des Ordners angezeigt.",
-        default=[],
-        value_type=RelationChoice(vocabulary="plone.app.multilingual.RootCatalog"),
-        required=False,
-        missing_value=[],
-    )
-    directives.widget(
-        "relations",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.multilingual.RootCatalog",
-        pattern_options={
-            "basePath": make_relation_root_path,
-        },
-    )
-
 
 @implementer(IContainerModule)
 class ContainerModule(Container):
@@ -911,14 +894,4 @@ class ContainerModule(Container):
 
     def items(self):
         # A list of items to display.
-        results = [
-            i.to_object for i in api.relation.get(source=self, relationship="relations")
-        ]
-        collection = ICollection(self, None)
-        if collection and collection.query:
-            collection_results = [i.getObject() for i in collection.results()]
-            results += [i for i in collection_results if i not in results]
-            if collection.limit and len(results) > collection.limit:
-                results = results[: collection.limit]
-        results += [i for i in self.contentValues() if i not in results]
-        return results
+        return [i for i in self.contentValues()]
