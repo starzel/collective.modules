@@ -20,6 +20,7 @@
   <include file="permissions.zcml" />
   <include file="indexers.zcml" />
   <include file="vocabularies.zcml" />
+  <include file="upgrades.zcml" />
 
   <genericsetup:registerProfile
       name="default"

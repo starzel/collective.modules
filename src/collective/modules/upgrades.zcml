@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.modules"
+    >
+
+  <genericsetup:registerProfile
+      name="to_1001"
+      title="Upgrade profile for collective.modules"
+      description="Add new action"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/to_1001"
+      />
+
+  <genericsetup:upgradeStep
+      title="Add new module: containermodule"
+      description=""
+      profile="collective.modules:default"
+      source="1000"
+      destination="1001"
+      handler="collective.modules.upgrades.to_1001"
+      />
+
+</configure>
