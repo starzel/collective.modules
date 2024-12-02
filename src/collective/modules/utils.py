@@ -4,6 +4,7 @@ from plone.app.contenttypes.browser.link_redirect_view import normalize_uid_from
 from plone.app.contenttypes.utils import replace_link_variables_by_paths
 from plone.app.uuid.utils import uuidToObject
 from zope.globalrequest import getRequest
+from zExceptions import Unauthorized
 
 
 def link_url(url, context, request=None):
@@ -24,7 +25,11 @@ def link_url(url, context, request=None):
 
     if "resolveuid" in url:
         uid, fragment = normalize_uid_from_path(url)
-        obj = uuidToObject(uid)
+        # Do not fail hard at the parent page
+        try:
+            obj = uuidToObject(uid)
+        except Unauthorized:
+            return url
         if obj is None:
             # uid can't resolve, return the url
             return url
