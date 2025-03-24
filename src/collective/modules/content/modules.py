@@ -734,13 +734,13 @@ class IMediathekModule(IModuleBase):
 
     link1_button_text = schema.TextLine(
         title="Text of first Link-Button",
-        default="More information",
+        default="",
         required=False,
     )
 
     link1_categorie = schema.TextLine(
         title="Text for the first link categorie",
-        default="Podcast",
+        default="",
         required=False,
     )
 
@@ -751,13 +751,13 @@ class IMediathekModule(IModuleBase):
 
     link2_button_text = schema.TextLine(
         title="Text of second Link-Button",
-        default="More information",
+        default="",
         required=False,
     )
 
     link2_categorie = schema.TextLine(
         title="Text for the second link categorie",
-        default="Podcast",
+        default="",
         required=False,
     )
 
@@ -768,13 +768,13 @@ class IMediathekModule(IModuleBase):
 
     link3_button_text = schema.TextLine(
         title="Text of third Link-Button",
-        default="More information",
+        default="",
         required=False,
     )
 
     link3_categorie = schema.TextLine(
         title="Text for the third link to each item",
-        default="Podcast",
+        default="",
         required=False,
     )
 
@@ -785,13 +785,13 @@ class IMediathekModule(IModuleBase):
 
     link4_button_text = schema.TextLine(
         title="Text of fourth Link-Button",
-        default="More information",
+        default="",
         required=False,
     )
 
     link4_categorie = schema.TextLine(
         title="Text for the fourth link categorie",
-        default="More information",
+        default="",
         required=False,
     )
 
