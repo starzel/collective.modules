@@ -20,8 +20,8 @@
                          tal:define="active python:repeat['item'].start and ' active' or ''"
                          tal:attributes="class string:carousel-item${active}">
                         <div class="carousel-image">
-                          <a tal:attributes="href python: item['url'];
-                                             title python: item['title'];">
+                          <a tal:attributes="href python: item.absolute_url();
+                                             title python: item.title;">
                             <img class="d-block wh-100"
                                  tal:define="image_url python: image_helper.image_url(item)"
                                  tal:condition="image_url"
@@ -30,10 +30,10 @@
                           </a>
                         </div>
                         <div class="dynajet-content">
-                            <a tal:attributes="href python: item['url'];">
-                              <h3 tal:content="python: plone_view.cropText(item['title'], 48)">Title</h3>
-                              <p tal:condition="python: item['description']"
-                                 tal:content="python: plone_view.cropText(item['description'], 102)">Description</p>
+                            <a tal:attributes="href python: item.absolute_url();">
+                              <h3 tal:content="python: plone_view.cropText(item.title, 48)">Title</h3>
+                              <p tal:condition="python: item.description"
+                                 tal:content="python: plone_view.cropText(item.description, 102)">Description</p>
                             </a>
                             <ul class="dynajet-icon-list bg-blue bottom">
                                 <li>

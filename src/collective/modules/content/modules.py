@@ -143,6 +143,15 @@ relationmodule_templates = SimpleVocabulary(
     ]
 )
 
+relationmodule_carousel_templates = SimpleVocabulary(
+    [
+        SimpleTerm(
+            value="carousel",
+            title=_("Carousel"),
+        ),
+    ]
+)
+
 
 class IRelationModule(IModuleBase):
     """Dexterity-Schema for Module"""
@@ -218,6 +227,23 @@ class RelationModule(Item):
         if collection.limit and len(results) > collection.limit:
             results = results[: collection.limit]
         return results
+
+
+class IRelationModuleCarousel(IRelationModule):
+    """Dexterity-Schema for Relation Module (Carousel)"""
+
+    directives.widget(template_variant=RadioFieldWidget)
+    template_variant = schema.Choice(
+        title="Variation",
+        vocabulary=relationmodule_carousel_templates,
+        required=False,
+        default="carousel",
+    )
+
+
+@implementer(IRelationModuleCarousel)
+class RelationModuleCarousel(RelationModule):
+    """Relation Module (Carousel) instance"""
 
 
 gallerymodule_templates = SimpleVocabulary(

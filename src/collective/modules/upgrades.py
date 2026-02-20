@@ -12,3 +12,9 @@ def to_1001(context=None):
     portal_setup = api.portal.get_tool("portal_setup")
     logger.info(f"Update to 1001")
     loadMigrationProfile(portal_setup, "profile-collective.modules:to_1001")
+
+
+def to_1002(context=None):
+    portal_setup = api.portal.get_tool("portal_setup")
+    logger.info("Update to 1002")
+    loadMigrationProfile(portal_setup, "profile-collective.modules:to_1002")

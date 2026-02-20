@@ -7,6 +7,7 @@
     <value purge="False">
       <element>gallerymodule</element>
       <element>relationmodule</element>
+      <element>relationmodule-carousel</element>
       <element>textmodule</element>
       <element>bannermodule</element>
       <element>mediathekmodule</element>

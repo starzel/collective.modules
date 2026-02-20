@@ -124,6 +124,22 @@
 
   <browser:page
       name="inner_module"
+      for="collective.modules.content.modules.IRelationModuleCarousel"
+      class=".modules.RelationModuleCarouselView"
+      template="templates/relation_carousel.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="full_module"
+      for="collective.modules.content.modules.IRelationModuleCarousel"
+      class=".modules.RelationModuleCarouselView"
+      template="templates/full_module.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="inner_module"
       for="collective.modules.content.modules.IGalleryModule"
       class=".modules.GalleryModuleView"
       template="templates/gallery.pt"
