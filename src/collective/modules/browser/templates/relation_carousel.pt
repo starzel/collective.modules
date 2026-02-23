@@ -1,84 +1,117 @@
-<metal:module-core define-macro="module_core"
+<metal:module-core
+    define-macro="module_core"
     i18n:domain="collective.modules"
     tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
                 items python: context.items();
-                item python: items[0] if items else None;
                 image_helper nocall: context/@@image_helper;
-                plone_view nocall: context/@@plone;">
+                plone_view nocall: context/@@plone;
+                link_url python:view.link_url(context.link);">
 
-    <div class="col-sm-12 col-md-6 col-xl-4">
-        <div class="dynajet-box bg-gray">
-            <div class="carousel carousel-box-full slide"
-                 id="carouselExample"
-                 data-bs-ride="carousel"
-                 data-bs-interval="10000"
-                 tal:attributes="id python: 'carousel_' + context.getId();
-                                 class python: 'carousel carousel-box-full slide ' + view.module_class();">
-                <div class="carousel-inner">
-                <tal:loop tal:repeat="item items">
-                    <div class="carousel-item"
-                         tal:define="active python:repeat['item'].start and ' active' or ''"
-                         tal:attributes="class string:carousel-item${active}">
-                        <div class="carousel-image">
-                          <a tal:attributes="href python: item.absolute_url();
-                                             title python: item.title;">
-                            <img class="d-block wh-100"
-                                 tal:define="image_url python: image_helper.image_url(item)"
-                                 tal:condition="image_url"
-                                 tal:attributes="src python: image_url;
-                                                 alt python: item.title;" />
-                          </a>
-                        </div>
-                        <div class="dynajet-content">
-                            <a tal:attributes="href python: item.absolute_url();">
-                              <h3 tal:content="python: plone_view.cropText(item.title, 48)">Title</h3>
-                              <p tal:condition="python: item.description"
-                                 tal:content="python: plone_view.cropText(item.description, 102)">Description</p>
-                            </a>
-                            <ul class="dynajet-icon-list bg-blue bottom">
-                                <li>
-                                    <a class="btn icon-dynajet-arrow"
-                                       href="#"
-                                       tal:content="python: context.link_text"
-                                       tal:attributes="href python: item.absolute_url();
-                                                       title python: item.title;">
-                                          Mehr erfahren
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </tal:loop>
+    <section class="teaser-flow stack-ml teaser-flow-posts push-l module three-item-row"
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-l module ' + view.module_class();">
+
+        <div tal:condition="python: context.title or context.description">
+            <h3 class="strong sans-h6 a-center"
+                tal:condition="python: context.title and context.display_title"
+                tal:content="python: context.title">
+                Title
+            </h3>
+            <h4 class="module__subtitle strong a-center"
+                tal:condition="python: context.description"
+                tal:content="python: context.description">
+                Description
+            </h4>
+            <div class="module__text plain-txt"
+               tal:condition="python: context.text"
+               tal:content="structure python: context.text.output">
+               Text
+            </div>
+        </div>
+
+        <div class="stop">
+            <div class="relation-carousel" role="group" aria-roledescription="Karussell">
+                <div class="relation-carousel__slide-control-wrapper" role="group" aria-label="Steuerelemente">
+                    <button type="button"
+                            class="relation-carousel__direction-button relation-carousel__direction-button--previous"
+                            data-carousel-control="prev"
+                            aria-label="Vorige Seite">
+                        <span class="relation-carousel__direction-icon" aria-hidden="true">&lt;</span>
+                    </button>
+                    <button type="button"
+                            class="relation-carousel__direction-button relation-carousel__direction-button--next"
+                            data-carousel-control="next"
+                            aria-label="Naechste Seite">
+                        <span class="relation-carousel__direction-icon" aria-hidden="true">&gt;</span>
+                    </button>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExample" role="button"
-                   data-bs-slide="prev"
-                   tal:attributes="href python: '#carousel_' + context.id">
-                    <span class="icon-dynajet-prev icon-big"
-                          aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExample" role="button"
-                   data-bs-slide="next"
-                   tal:attributes="href python: '#carousel_' + context.id">
-                    <span class="icon-dynajet-next icon-big"
-                          aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                <div class="relation-carousel__scroll-container" tabindex="-1">
+                    <ol class="flow-ml relation-carousel__slide-wrapper">
+                      <tal:item tal:repeat="item python: items">
+                        <li class="teaser-item teaser-item-post relation-carousel__slide">
+
+                    <div class="mb-4"
+                         tal:define="images nocall:item/@@images;
+                                     tag python: images.tag(fieldname='image', height=350, alt=item.title);"
+                         tal:condition="python: tag">
+                      <a tal:attributes="href python: item.absolute_url();
+                                         title python: item.title;">
+                        <img tal:replace="structure python: tag" />
+                      </a>
+                    </div>
+
+                    <a class="full-text-link"
+                       tal:attributes="href python: item.absolute_url();
+                                       title python: item.title;">
+                        <div class="link-outer stack-xs">
+                            <div class="stack-xxs">
+                                <h4 class="sans-t2 strong"
+                                    tal:content="python: item.title">
+                                    Title
+                                </h4>
+                                <p tal:content="python: plone_view.cropText(view.description(item), 150)">
+                                    Description
+                                </p>
+                            </div>
+                            <p class="teaser-link sans-m2 strong">
+                                <span class="btn-link btn-s btn-icon-left trim">
+                                    <span class="text" tal:content="python: context.link_text">mehr lesen</span>
+                                </span>
+                            </p>
+                        </div>
+                    </a>
+
+                        </li>
+                      </tal:item>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="stack-s"
+             tal:condition="python: link_url">
+            <div class="a-center">
+                <a class="btn-ghost btn"
+                   tal:attributes="href python: link_url"
+                   tal:content="python: context.link_button_text">
+                    To Link
                 </a>
             </div>
         </div>
-        <div class="row edit-module" tal:condition="python: checkPermission('Modify portal content', context)">
-            <div class="col-12">
-                <a class="btn btn-primary btn-sm  float-right"
-                   tal:condition="python: checkPermission('Modify portal content', context)"
-                   tal:attributes="href python: context.absolute_url() + '/edit'">
-                    Edit Module
-                </a>
-            </div>
+
+        <div tal:condition="python: checkPermission('Modify portal content', context)">
+            <a class="btn btn-primary btn-sm"
+               tal:condition="python: checkPermission('Modify portal content', context)"
+               tal:attributes="href python: context.absolute_url() + '/edit'">
+                Edit Module
+            </a>
             <a class="btn btn-primary btn-sm float-right"
                 tal:condition="python: context.isPrincipiaFolderish and checkPermission('Modify portal content', context)"
                 tal:attributes="href python: context.absolute_url() + '/folder_contents'">
                 Manage Content
             </a>
         </div>
-    </div>
+
+    </section>
+
 </metal:module-core>
