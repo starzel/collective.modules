@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<object name="relationmodule-carousel" meta_type="Dexterity FTI" i18n:domain="plone"
+<object name="relationcarousel-module" meta_type="Dexterity FTI" i18n:domain="plone"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Modul: Relationen (Karussell)</property>
  <property name="description" i18n:translate=""></property>
  <property name="icon_expr">string:contenttype/document</property>
- <property name="factory">relationmodule-carousel</property>
- <property name="add_view_expr">string:${folder_url}/++add++relationmodule-carousel</property>
+ <property name="factory">relationcarousel-module</property>
+ <property name="add_view_expr">string:${folder_url}/++add++relationcarousel-module</property>
  <property name="link_target"></property>
  <property name="immediate_view">redirect_to_parent</property>
  <property name="global_allow">False</property>
@@ -20,8 +20,8 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
- <property name="klass">collective.modules.content.modules.RelationModuleCarousel</property>
- <property name="schema">collective.modules.content.modules.IRelationModuleCarousel</property>
+ <property name="klass">collective.modules.content.modules.RelationCarouselModule</property>
+ <property name="schema">collective.modules.content.modules.IRelationCarouselModule</property>
  <property name="behaviors">
   <element value="plone.dublincore"/>
   <element value="plone.collection" />

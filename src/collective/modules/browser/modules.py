@@ -192,7 +192,7 @@ class RelationModuleView(ModuleBaseView):
         return ""
 
 
-class RelationModuleCarouselView(RelationModuleView):
+class RelationCarouselModuleView(RelationModuleView):
 
     carousel = ViewPageTemplateFile("templates/relation_carousel.pt")
 

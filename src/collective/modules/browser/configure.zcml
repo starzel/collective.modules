@@ -124,16 +124,16 @@
 
   <browser:page
       name="inner_module"
-      for="collective.modules.content.modules.IRelationModuleCarousel"
-      class=".modules.RelationModuleCarouselView"
+      for="collective.modules.content.modules.IRelationCarouselModule"
+      class=".modules.RelationCarouselModuleView"
       template="templates/relation_carousel.pt"
       permission="zope2.View"
       />
 
   <browser:page
       name="full_module"
-      for="collective.modules.content.modules.IRelationModuleCarousel"
-      class=".modules.RelationModuleCarouselView"
+      for="collective.modules.content.modules.IRelationCarouselModule"
+      class=".modules.RelationCarouselModuleView"
       template="templates/full_module.pt"
       permission="zope2.View"
       />

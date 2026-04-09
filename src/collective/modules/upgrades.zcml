@@ -17,7 +17,7 @@
   <genericsetup:registerProfile
       name="to_1002"
       title="Upgrade profile for collective.modules"
-      description="Add relationmodule-carousel"
+      description="Add relationcarousel-module"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       directory="profiles/to_1002"
       />
@@ -32,7 +32,7 @@
       />
 
   <genericsetup:upgradeStep
-      title="Add new module: relationmodule-carousel"
+      title="Add new module: relationcarousel-module"
       description=""
       profile="collective.modules:default"
       source="1001"

@@ -229,7 +229,7 @@ class RelationModule(Item):
         return results
 
 
-class IRelationModuleCarousel(IRelationModule):
+class IRelationCarouselModule(IRelationModule):
     """Dexterity-Schema for Relation Module (Carousel)"""
 
     directives.widget(template_variant=RadioFieldWidget)
@@ -241,8 +241,8 @@ class IRelationModuleCarousel(IRelationModule):
     )
 
 
-@implementer(IRelationModuleCarousel)
-class RelationModuleCarousel(RelationModule):
+@implementer(IRelationCarouselModule)
+class RelationCarouselModule(RelationModule):
     """Relation Module (Carousel) instance"""
 
 
