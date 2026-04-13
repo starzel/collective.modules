@@ -1,0 +1,107 @@
+<metal:module-core
+    define-macro="module_core"
+    i18n:domain="collective.modules"
+    tal:define="checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+                items python: context.items();
+                image_helper nocall: context/@@image_helper;
+                plone_view nocall: context/@@plone;
+                link_url python:view.link_url(context.link);">
+
+    <section class="teaser-flow stack-ml teaser-flow-posts push-l module three-item-row"
+         tal:attributes="id python: 'module_' + context.getId();
+                         class python: 'teaser-flow stack-ml teaser-flow-posts push-l module ' + view.module_class();">
+
+        <div tal:condition="python: context.title or context.description">
+            <h3 class="strong sans-h6 a-center"
+                tal:condition="python: context.title and context.display_title"
+                tal:content="python: context.title">
+                Title
+            </h3>
+            <h4 class="module__subtitle strong a-center"
+                tal:condition="python: context.description"
+                tal:content="python: context.description">
+                Description
+            </h4>
+            <div class="module__text plain-txt"
+               tal:condition="python: context.text"
+               tal:content="structure python: context.text.output">
+               Text
+            </div>
+        </div>
+
+        <div class="stop">
+            <div class="relation-carousel" role="group" aria-roledescription="Karussell">
+                <div class="relation-carousel__controls">
+                    <button class="carousel-button carousel-button-prev" type="button" aria-label="Vorheriger Slide" data-carousel-control="prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" style="fill: currentcolor;" class="icon"><path fill-rule="evenodd" d="M21.293 9.293 22.707 10.707 15.414 18 22.707 25.293 21.293 26.707 12.586 18z"></path></svg></button>
+                    <button class="carousel-button carousel-button-next" type="button" aria-label="Nächster Slide" data-carousel-control="next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" style="fill: currentcolor;" class="icon"><path fill-rule="evenodd" d="M14.707 9.293 13.293 10.707 20.586 18l-7.293 7.293 1.414 1.414L23.414 18z"></path></svg></button>
+                </div>
+                <div class="relation-carousel__scroll-container" tabindex="-1">
+                    <ol class="flow-ml relation-carousel__slide-wrapper">
+                      <tal:item tal:repeat="item python: items">
+                        <li class="teaser-item teaser-item-post relation-carousel__slide">
+
+                    <div class="mb-4"
+                         tal:define="images nocall:item/@@images;
+                                     tag python: images.tag(fieldname='image', scale='large', alt=item.title);"
+                         tal:condition="python: tag">
+                      <a tal:attributes="href python: item.absolute_url();
+                                         title python: item.title;">
+                        <img tal:replace="structure python: tag" />
+                      </a>
+                    </div>
+
+                    <a class="full-text-link"
+                       tal:attributes="href python: item.absolute_url();
+                                       title python: item.title;">
+                        <div class="link-outer stack-xs">
+                            <div class="stack-xxs">
+                                <h4 class="sans-t2 strong"
+                                    tal:content="python: item.title">
+                                    Title
+                                </h4>
+                                <p tal:content="python: plone_view.cropText(view.description(item), 150)">
+                                    Description
+                                </p>
+                            </div>
+                            <p class="teaser-link sans-m2 strong">
+                                <span class="btn-link btn-s btn-icon-left trim">
+                                    <span class="text" tal:content="python: context.link_text">mehr lesen</span>
+                                </span>
+                            </p>
+                        </div>
+                    </a>
+
+                        </li>
+                      </tal:item>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="stack-s"
+             tal:condition="python: link_url">
+            <div class="a-center">
+                <a class="btn-ghost btn"
+                   tal:attributes="href python: link_url"
+                   tal:content="python: context.link_button_text">
+                    To Link
+                </a>
+            </div>
+        </div>
+
+        <div tal:condition="python: checkPermission('Modify portal content', context)">
+            <a class="btn btn-primary btn-sm"
+               tal:condition="python: checkPermission('Modify portal content', context)"
+               tal:attributes="href python: context.absolute_url() + '/edit'">
+                Edit Module
+            </a>
+            <a class="btn btn-primary btn-sm float-right"
+                tal:condition="python: context.isPrincipiaFolderish and checkPermission('Modify portal content', context)"
+                tal:attributes="href python: context.absolute_url() + '/folder_contents'">
+                Manage Content
+            </a>
+        </div>
+
+    </section>
+
+</metal:module-core>
