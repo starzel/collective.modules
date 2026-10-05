@@ -18,11 +18,10 @@
           class="module__title strong sans-h6 a-center" tal:condition="python: context.title" tal:content="python: context.title">
           Title</h3>
         <p
-          class="module__subtitle" tal:condition="python: context.description" tal:content="python: context.description">
+          class="module__subtitle strong" tal:condition="python: context.description" tal:content="python: context.description">
           Description</p>
       </div>
     </div>
-    <div class="stop">
       <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-4 mb-4 text-container plain-txt"
            tal:attributes="class python: 'col-sm-12 sans-t2 col-md-' + str(col_md) + ' col-lg-' + str(col_lg) + ' mb-4 text-container'"
@@ -53,6 +52,5 @@
           </a>
         </div>
       </div>
-    </div>
   </section>
 </metal:module-core>
