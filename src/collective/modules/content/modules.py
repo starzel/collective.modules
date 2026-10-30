@@ -249,6 +249,10 @@ class RelationCarouselModule(RelationModule):
 gallerymodule_templates = SimpleVocabulary(
     [
         SimpleTerm(value="gallery", title="Default Gallery"),
+        SimpleTerm(
+            value="gallery_scrollable",
+            title=_("Galerie mit Scrollleiste"),
+        ),
     ]
 )
 

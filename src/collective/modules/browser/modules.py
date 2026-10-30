@@ -200,6 +200,7 @@ class RelationCarouselModuleView(RelationModuleView):
 class GalleryModuleView(ModuleBaseView):
 
     gallery = ViewPageTemplateFile("templates/gallery.pt")
+    gallery_scrollable = ViewPageTemplateFile("templates/gallery_scrollable.pt")
 
 
 class SearchModuleView(ModuleBaseView):

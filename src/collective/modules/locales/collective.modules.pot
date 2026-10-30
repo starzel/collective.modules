@@ -84,3 +84,7 @@ msgstr ""
 #: collective/modules/configure.zcml
 msgid "collective.modules (uninstall)"
 msgstr ""
+
+#: collective/modules/content/modules.py
+msgid "Galerie mit Scrollleiste"
+msgstr ""
